@@ -845,6 +845,48 @@
 
   <!-- JavaScript Section -->
   <script>
+  // ================== CUSTOM PROFESSIONAL ALERT SYSTEM ==================
+    // ব্রাউজারের ডিফল্ট alert() কে আধুনিক ডায়ালগে রূপান্তর
+    window.alert = function(message) {
+      showCustomAlert(message);
+    };
+
+    function showCustomAlert(message, title = "Tasnim Medicine Corner") {
+      const modal = document.getElementById('custom-alert-modal');
+      const titleEl = document.getElementById('alert-modal-title');
+      const msgEl = document.getElementById('alert-modal-message');
+      const iconEl = document.getElementById('alert-modal-icon');
+
+      if (!modal || !msgEl) return;
+
+      titleEl.innerText = title;
+      msgEl.innerText = message;
+
+      const text = message.toLowerCase();
+      // মেসেজ অনুযায়ী স্বয়ংক্রিয়ভাবে রঙ ও আইকন পরিবর্তন
+      if (text.includes('success') || text.includes('সফল') || text.includes('যুক্ত')) {
+        iconEl.innerHTML = "✅";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-emerald-100 text-emerald-700 shadow-inner";
+      } else if (text.includes('error') || text.includes('failed') || text.includes('ব্যর্থ') || text.includes('cannot') || text.includes('incorrect')) {
+        iconEl.innerHTML = "❌";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-red-100 text-red-600 shadow-inner";
+      } else {
+        iconEl.innerHTML = "⚠️";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-700 shadow-inner";
+      }
+
+      modal.style.display = 'flex';
+      modal.classList.remove('hidden');
+    }
+
+    function closeCustomAlert() {
+      const modal = document.getElementById('custom-alert-modal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.classList.add('hidden');
+      }
+    }
+  
     // ================== SUPABASE CONFIG ==================
     const SUPABASE_URL = "https://yyilfyvwanundhkwrpvh.supabase.co";
     const SUPABASE_KEY = "sb_publishable_f2vp8P9rpfpOMmFKq5_HWg_fetxfMft";
@@ -1916,5 +1958,21 @@
       alertsBox.innerHTML = alertHtml || `<p class="text-slate-400">No urgent alerts found.</p>`;
     }
   </script>
+  <!-- ================= MODERN CUSTOM DIALOG MODAL ================= -->
+  <div id="custom-alert-modal" style="display: none;" class="fixed inset-0 bg-slate-900/60 z-[200] items-center justify-center p-4 backdrop-blur-sm transition-all">
+    <div class="bg-white w-full max-w-xs rounded-2xl p-6 shadow-2xl text-center space-y-3.5 border border-slate-100 transform transition-all scale-100 animate-in">
+      <!-- Dynamic Icon -->
+      <div id="alert-modal-icon" class="w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-600 shadow-inner">
+        ⚠️
+      </div>
+      <div>
+        <h3 id="alert-modal-title" class="font-bold text-base text-slate-800">Tasnim Medicine Corner</h3>
+        <p id="alert-modal-message" class="text-xs text-slate-600 mt-1 leading-relaxed"></p>
+      </div>
+      <button type="button" onclick="closeCustomAlert()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold py-3 rounded-xl text-xs shadow-md transition tracking-wide">
+        OK
+      </button>
+    </div>
+  </div>
 </body>
 </html>
