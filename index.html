@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Tasnim Medicine Corner</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PDF Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
-  <!-- Supabase JS Client CDN -->
+  <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: DM Sans & Hind Siliguri (V1 Classic) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,9 +46,10 @@
     .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* ================= V1 CLASSIC HEADER ================= */
     header.app-header {
       height: 72px;
-      padding: 0 24px;
+      padding: 0 12px;
       background: var(--navy) !important;
       box-shadow: 0 4px 18px rgba(12, 30, 48, 0.15);
       position: sticky;
@@ -57,10 +60,13 @@
       align-items: center;
     }
 
-    /* DESKTOP PC LAYOUT (>= 992px) */
+    /* ================= DESKTOP PC LAYOUT (>= 992px) ================= */
     @media (min-width: 992px) {
-      body { padding-bottom: 30px !important; }
+      body {
+        padding-bottom: 30px !important;
+      }
 
+      /* V1 Fixed Left Sidebar */
       body > nav {
         position: fixed !important;
         top: 72px !important;
@@ -134,16 +140,22 @@
         align-items: start !important;
       }
       #tab-stock > button { grid-column: 1 / -1 !important; }
-      #add-med-form { grid-column: 1 !important; }
-      #tab-stock > .inventory-panel { grid-column: 2 !important; }
+      #tab-stock > .inventory-panel { grid-column: 1 / -1 !important; }
 
-      .premium-kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+      .premium-kpi-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      }
     }
 
-    /* MOBILE LAYOUT (< 992px) */
+    /* ================= MOBILE PHONE LAYOUT (< 992px) ================= */
     @media (max-width: 991px) {
-      body { padding-bottom: 95px !important; }
-      header.app-header { height: 66px; padding: 0 16px; }
+      body {
+        padding-bottom: 95px !important;
+      }
+      header.app-header {
+        height: 68px;
+        padding: 0 10px;
+      }
       main {
         width: 100% !important;
         max-width: 600px !important;
@@ -205,37 +217,6 @@
       background: #ffffff !important;
     }
 
-    .purchase-entry-box {
-      padding: 14px;
-      border: 1px solid #dce8e8;
-      border-radius: 14px;
-      background: linear-gradient(145deg, #f6fbfa, #ffffff);
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-    .purchase-entry-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #e5eeee;
-      padding-bottom: 8px;
-    }
-    .purchase-calculation-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .purchase-calculation-grid > div {
-      padding: 9px 11px;
-      border-radius: 10px;
-      background: #edf3f5;
-    }
-    .calculated-buy {
-      background: #e3f5ef !important;
-      border: 1px solid #ccebe0;
-    }
-
     .purchase-table {
       width: 100%;
       border-collapse: collapse;
@@ -282,7 +263,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans">
 
-  <!-- ================= SECURITY LOCK SCREEN OVERLAY ================= -->
+  <!-- ================= V1 CLASSIC SECURITY LOCK SCREEN ================= -->
   <div id="app-lock-screen" style="display: flex;" class="fixed inset-0 bg-slate-900/95 z-[100] items-center justify-center p-4 backdrop-blur-md">
     <div class="bg-white w-full max-w-xs rounded-2xl p-6 shadow-2xl text-center space-y-4 border border-slate-200">
       <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
@@ -323,27 +304,32 @@
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- ================= V1 HEADER (১০০% সম্পূর্ণ নাম দৃশ্যমান - কোনো কাটছাঁট নেই) ================= -->
   <header class="app-header text-white no-print">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center font-bold text-xl shadow-md">
+    <!-- Left Logo & Full Title -->
+    <div class="flex items-center gap-2 min-w-0 flex-1">
+      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center font-bold text-lg shadow shrink-0">
         T
       </div>
-      <div>
-        <h1 class="text-base font-bold leading-tight">Tasnim Medicine Corner</h1>
-        <div class="flex items-center gap-1.5 mt-0.5">
-          <span id="user-role-badge" class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full font-bold">Admin</span>
-          <span id="sync-status" class="text-[10px] bg-emerald-700 px-2 py-0.5 rounded-full font-medium transition-all">Online</span>
+      <div class="min-w-0 flex-1">
+        <!-- কোনো truncate বা কাটছাঁট ছাড়া সম্পূর্ণ নাম -->
+        <h1 class="text-xs sm:text-base font-extrabold leading-tight text-white tracking-tight whitespace-nowrap">
+          Tasnim Medicine Corner
+        </h1>
+        <div class="flex items-center gap-1.5 mt-0.5 text-[9px] sm:text-[10px]">
+          <span id="user-role-badge" class="bg-slate-800 px-1.5 py-0.5 rounded font-bold text-emerald-400">Admin</span>
+          <span id="sync-status" class="bg-emerald-700 px-1.5 py-0.5 rounded font-medium">Online</span>
         </div>
       </div>
     </div>
     
-    <div class="flex items-center gap-2">
-      <button onclick="openSettingsModal()" id="btn-settings" title="Settings" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-medium shadow-sm transition">
-        ⚙️ PIN
+    <!-- Right Actions (জায়গা সাশ্রয়ী ও স্লিম) -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button onclick="openSettingsModal()" id="btn-settings" title="Change PIN" class="h-8 px-2 sm:px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold shadow-sm transition flex items-center gap-1">
+        <span>⚙️</span><span class="hidden sm:inline">PIN</span>
       </button>
-      <button onclick="lockApp()" title="Lock Screen" class="text-xs bg-red-600 hover:bg-red-700 active:bg-red-800 px-3 py-2 rounded-xl font-bold shadow-sm flex items-center gap-1.5 transition">
-        <span>🔒</span><span>Lock</span>
+      <button onclick="lockApp()" title="Lock Screen" class="h-8 px-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-xs font-bold shadow transition flex items-center gap-1">
+        <span>🔒</span><span class="hidden sm:inline">Lock</span>
       </button>
     </div>
   </header>
@@ -373,208 +359,121 @@
 
     <!-- TAB 1: POS / Billing -->
     <section id="tab-pos" class="tab-content active space-y-4">
-      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
         <label class="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Search Medicine in Shop Stock:</label>
         <input 
           type="text" 
           id="pos-search" 
           oninput="searchMedicinePOS(this.value)" 
-          placeholder="Type brand name or generic (e.g. Napa, Seclo)..." 
-          class="w-full p-3.5 border rounded-xl focus:outline-emerald-500 text-sm bg-slate-50"
+          placeholder="Type medicine name or generic (e.g. Napa, Seclo)..." 
+          class="w-full p-3 border rounded-xl focus:outline-emerald-500 text-sm bg-slate-50"
         />
-        <div id="pos-search-results" class="divide-y max-h-72 overflow-y-auto mt-2 hidden border rounded-xl bg-white shadow-xl"></div>
+        <div id="pos-search-results" class="divide-y max-h-56 overflow-y-auto mt-2 hidden border rounded-xl bg-white shadow-xl"></div>
       </div>
 
-      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-        <div>
-          <h2 class="font-bold text-base text-slate-800 mb-3 border-b pb-2 flex justify-between items-center">
-            <span>Current Memo (Cart)</span>
-            <span class="text-xs font-normal text-slate-500">Live Billing</span>
-          </h2>
-          <div id="pos-cart-items" class="space-y-2 max-h-80 overflow-y-auto text-sm pr-1">
-            <p class="text-xs text-slate-400 text-center py-8">No items added to cart</p>
-          </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="font-bold text-sm text-slate-700 mb-2 border-b pb-1">Current Memo (Cart)</h2>
+        <div id="pos-cart-items" class="space-y-2 max-h-56 overflow-y-auto text-sm">
+          <p class="text-xs text-slate-400 text-center py-4">No items added to cart</p>
         </div>
 
-        <div class="border-t mt-4 pt-3 space-y-2 text-sm">
+        <div class="border-t mt-3 pt-3 space-y-2 text-sm">
           <div class="flex justify-between text-slate-600">
             <span>Subtotal:</span>
             <span>৳ <span id="cart-subtotal">0.00</span></span>
           </div>
           <div class="flex justify-between items-center text-slate-600">
             <span>Discount (৳):</span>
-            <input type="number" id="cart-discount" oninput="calculateTotal()" value="0" class="w-24 text-right p-1.5 border rounded-lg text-sm bg-slate-50"/>
+            <input type="number" id="cart-discount" oninput="calculateTotal()" value="0" class="w-20 text-right p-1 border rounded text-sm bg-slate-50"/>
           </div>
-          <div class="flex justify-between font-bold text-lg text-emerald-700 border-t pt-2">
+          <div class="flex justify-between font-bold text-base text-emerald-700 border-t pt-2">
             <span>Grand Total:</span>
             <span>৳ <span id="cart-total">0.00</span></span>
           </div>
-
-          <button onclick="processSale()" class="w-full mt-3 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition text-sm">
-            Complete Sale & Generate Memo
-          </button>
         </div>
+
+        <button onclick="processSale()" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition text-sm">
+          Complete Sale & Generate Memo
+        </button>
       </div>
     </section>
 
     <!-- TAB 2: INVENTORY / Stock -->
     <section id="tab-stock" class="tab-content space-y-4">
-      <button onclick="openAddMedicineForm()" class="w-full bg-slate-800 hover:bg-slate-900 text-white py-3 rounded-xl text-sm font-bold shadow transition text-left px-5 flex items-center justify-between">
-        <span>＋ Add Medicine / Syrup to Stock</span>
-        <span class="text-xs text-slate-400">Click to open form</span>
-      </button>
-
-      <form id="add-med-form" onsubmit="saveMedicine(event)" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hidden space-y-4">
-        <input type="hidden" id="m-edit-id" value="">
-
-        <div class="border-b pb-2 flex justify-between items-center">
-          <div>
-            <h3 id="form-title" class="font-bold text-base text-slate-800">New Stock Entry</h3>
-            <p class="text-xs text-slate-400">Search cloud database or type manually</p>
-          </div>
-          <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">Cloud Connected</span>
-        </div>
-
-        <div class="relative">
-          <label class="text-xs text-slate-600 font-bold block mb-1">Brand Name * (Type to search)</label>
-          <input 
-            type="text" 
-            id="m-name" 
-            oninput="searchMasterMedicines(this.value)" 
-            autocomplete="off"
-            required 
-            class="w-full p-2.5 border rounded-xl text-sm focus:outline-emerald-500" 
-            placeholder="Type name (e.g. Napa, Ace, Seclo)..."
-          />
-          <div id="master-search-dropdown" class="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-300 rounded-xl shadow-2xl max-h-64 overflow-y-auto hidden z-50 divide-y text-xs"></div>
-        </div>
-
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
-          <label class="text-xs text-slate-600 font-bold block mb-1">Generic Name</label>
-          <input 
-            type="text" 
-            id="m-generic" 
-            class="w-full p-2.5 border rounded-xl text-sm focus:outline-emerald-500 bg-slate-50" 
-            placeholder="Auto-fills from cloud or type manually"
-          />
+          <h2 class="text-sm font-bold text-slate-800">Pharmacy Inventory Stock</h2>
+          <p class="text-xs text-slate-400">View, edit or search current medicines in stock</p>
         </div>
+        <button onclick="switchTab('purchases'); openMultiInvoiceModal();" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow flex items-center gap-1.5 transition">
+          <span>＋</span> <span>New Purchase Invoice (এক চালানে সব ওষুধ)</span>
+        </button>
+      </div>
 
-        <div class="grid grid-cols-2 gap-3">
+      <!-- Quick Edit Medicine Form (Modal) -->
+      <div id="quick-edit-modal" class="fixed inset-0 bg-slate-950/70 z-50 hidden flex items-center justify-center p-3 backdrop-blur-sm">
+        <form id="add-med-form" onsubmit="saveMedicine(event)" class="bg-white w-full max-w-lg rounded-2xl p-5 shadow-2xl border border-slate-200 space-y-3 max-h-[90vh] overflow-y-auto">
+          <input type="hidden" id="m-edit-id" value="">
+          <div class="flex justify-between items-center border-b pb-2">
+            <h3 id="form-title" class="font-bold text-base text-slate-800">Edit Medicine Stock</h3>
+            <button type="button" onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
+          </div>
+
           <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Batch No.</label>
-            <input type="text" id="m-batch" class="w-full p-2.5 border rounded-xl text-sm" placeholder="B102"/>
-          </div>
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Expiry Date *</label>
-            <input type="date" id="m-expiry" required class="w-full p-2.5 border rounded-xl text-sm"/>
-          </div>
-        </div>
-
-        <div class="purchase-entry-box">
-          <div class="purchase-entry-heading">
-            <div>
-              <b class="text-xs text-slate-800">Supplier & Invoice Info</b>
-              <small class="text-[10px] text-slate-400 block">Purchase Register Details</small>
-            </div>
-            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">INVOICE</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div class="col-span-2">
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Supplier / Company Name *</label>
-              <input type="text" id="m-supplier" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Invoice Number *</label>
-              <input type="text" id="m-invoice-no" required placeholder="INV-001" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Purchase Date *</label>
-              <input type="date" id="m-purchase-date" required class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Paid Amount (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-paid-amount" value="0" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Payment Method</label>
-              <select id="m-payment-method" class="w-full p-2 border rounded-lg text-xs">
-                <option value="Cash">Cash</option><option value="Bank">Bank</option><option value="Mobile Banking">Mobile Banking</option><option value="Credit">Credit</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="purchase-entry-box">
-          <div class="purchase-entry-heading">
-            <b class="text-xs text-slate-800">Pack & Unit Calculation</b>
-            <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">CALCULATOR</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Pack Qty</label>
-              <input type="number" min="0" step="1" id="m-purchase-qty" value="1" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Pack Size</label>
-              <input type="text" id="m-pack-size" value="1x1's" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Units per Pack</label>
-              <input type="number" min="1" step="1" id="m-pack-units" value="1" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Unit I.P (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-unit-ip" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Unit VAT (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-unit-vat" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Line Discount (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-line-discount" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-          </div>
-          <div class="purchase-calculation-grid text-xs">
-            <div><small class="text-slate-500 block">Total Units</small><b id="m-total-units">0</b></div>
-            <div class="calculated-buy"><small class="text-teal-700 font-bold block">Buy Price / Unit</small><b id="m-calculated-buy" class="text-teal-800">৳0.00</b></div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2.5">
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Buy Price (৳)</label>
-            <input type="number" step="0.01" id="m-buy" required class="w-full p-2.5 border rounded-xl text-sm"/>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Brand Name *</label>
+            <input type="text" id="m-name" required class="w-full p-2.5 border rounded-xl text-sm"/>
           </div>
           <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Sell Price (৳)</label>
-            <input type="number" step="0.01" id="m-sell" required class="w-full p-2.5 border rounded-xl text-sm"/>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Generic Name</label>
+            <input type="text" id="m-generic" class="w-full p-2.5 bg-slate-50 border rounded-xl text-sm"/>
           </div>
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Stock Qty</label>
-            <input type="number" id="m-stock" required class="w-full p-2.5 border rounded-xl text-sm"/>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Batch No.</label>
+              <input type="text" id="m-batch" class="w-full p-2.5 border rounded-xl text-sm"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Expiry Date *</label>
+              <input type="date" id="m-expiry" required class="w-full p-2.5 border rounded-xl text-sm"/>
+            </div>
           </div>
-        </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Buy Price (৳)</label>
+              <input type="number" step="0.01" id="m-buy" required class="w-full p-2.5 border rounded-xl text-sm font-bold"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Sell Price (৳)</label>
+              <input type="number" step="0.01" id="m-sell" required class="w-full p-2.5 border rounded-xl text-sm font-bold text-emerald-600"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 mb-1">Current Stock</label>
+              <input type="number" id="m-stock" required class="w-full p-2.5 border rounded-xl text-sm font-bold"/>
+            </div>
+          </div>
 
-        <div class="flex gap-2 pt-2">
-          <button type="submit" id="form-submit-btn" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm shadow">
-            Save to Stock
-          </button>
-          <button type="button" onclick="cancelEdit()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-3 rounded-xl font-bold text-sm">
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div class="flex gap-2 pt-2">
+            <button type="submit" id="form-submit-btn" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl font-bold text-xs shadow">
+              Update Stock
+            </button>
+            <button type="button" onclick="closeEditModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold text-xs">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
 
-      <div class="inventory-panel p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
+      <!-- Shop Inventory List Panel -->
+      <div class="inventory-panel p-4 bg-white rounded-xl shadow-sm border border-slate-200">
         <div class="flex justify-between items-center mb-3">
           <div>
             <h3 class="font-bold text-base text-slate-800">Shop Inventory</h3>
-            <p class="text-xs text-slate-400">Manage medicine quantities & prices</p>
+            <p class="text-xs text-slate-400">Search and review medicines</p>
           </div>
           <span id="stock-count" class="text-xs font-bold bg-teal-50 text-teal-700 px-3 py-1 rounded-full border border-teal-200">0 ITEMS</span>
         </div>
-        <input id="stock-search" type="text" oninput="renderStockList(this.value)" placeholder="Search current shop stock..." class="w-full p-3 border rounded-xl text-sm mb-3 bg-slate-50"/>
+        <input id="stock-search" type="text" oninput="renderStockList(this.value)" placeholder="Search current shop stock..." class="w-full p-2.5 border rounded-xl text-sm mb-3 bg-slate-50"/>
         
         <div class="flex gap-2 mb-3 flex-wrap">
           <button type="button" class="stock-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white" onclick="setStockFilter('all', this)">All Stock</button>
@@ -587,19 +486,21 @@
       </div>
     </section>
 
-    <!-- PURCHASE MANAGEMENT TAB -->
+    <!-- TAB 3: PURCHASES & MULTI-INVOICE BUILDER -->
     <section id="tab-purchases" class="tab-content space-y-4">
-      <div class="p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white flex justify-between items-center shadow-md">
+      
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 shadow-md">
         <div>
           <span class="text-xs text-teal-400 font-bold uppercase tracking-wider">PROCUREMENT</span>
-          <h2 class="text-xl font-bold mt-1">Purchase Invoices</h2>
-          <p class="text-xs text-slate-300">Track supplier bills, payments, and dues</p>
+          <h2 class="text-xl font-bold mt-0.5">Supplier Purchase Register</h2>
+          <p class="text-xs text-slate-300">এক চালানে একাধিক ওষুধ এক সাথে এন্ট্রি ও বাকি পরিশোধের খতিয়ান</p>
         </div>
-        <button type="button" onclick="switchTab('stock');openAddMedicineForm()" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow">
-          ＋ New Purchase
+        <button onclick="openMultiInvoiceModal()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl shadow flex items-center justify-center gap-2 transition">
+          <span>🧾</span> <span>＋ New Purchase Invoice (এক চালানে সব)</span>
         </button>
       </div>
 
+      <!-- Financial Metrics -->
       <div class="grid grid-cols-3 gap-3">
         <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
           <small class="text-xs text-slate-500 font-bold block">Total Purchase</small>
@@ -615,12 +516,13 @@
         </div>
       </div>
 
-      <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3">
+      <!-- Saved Purchase Invoices Table -->
+      <div class="p-4 sm:p-5 bg-white rounded-xl border border-slate-200 shadow-sm space-y-3">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-sm text-slate-800">Purchase Invoices Register</h3>
+          <h3 class="font-bold text-sm text-slate-800">Saved Supplier Invoices</h3>
           <button type="button" onclick="loadPurchaseRegister()" class="text-xs text-teal-700 bg-teal-50 px-3 py-1 rounded-lg font-bold">↻ Refresh</button>
         </div>
-        <input id="purchase-search" type="search" oninput="renderPurchaseRegister()" placeholder="Search supplier or invoice number..." class="w-full p-3 border rounded-xl text-sm bg-slate-50"/>
+        <input id="purchase-search" type="search" oninput="renderPurchaseRegister()" placeholder="Search supplier or invoice number..." class="w-full p-2.5 border rounded-xl text-sm bg-slate-50"/>
         
         <div class="overflow-x-auto">
           <table class="purchase-table">
@@ -635,9 +537,9 @@
       </div>
     </section>
 
-    <!-- TAB 3: Accounts & Dashboard -->
+    <!-- TAB 4: Accounts & Dashboard -->
     <section id="tab-reports" class="tab-content space-y-4">
-      <div class="p-6 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white flex justify-between items-center shadow-md">
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white flex justify-between items-center shadow-md">
         <div>
           <span class="text-xs text-teal-400 font-bold uppercase tracking-wider">BUSINESS OVERVIEW</span>
           <h2 class="text-xl font-bold mt-1">Pharmacy Performance</h2>
@@ -648,23 +550,24 @@
         </div>
       </div>
 
+      <!-- KPI Grid -->
       <div class="premium-kpi-grid grid gap-3">
-        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
           <span class="text-xs text-slate-500 font-bold block">Total Medicines</span>
           <strong id="dash-medicine-count" class="text-2xl font-bold text-slate-800 mt-1 block">0</strong>
           <small class="text-[10px] text-slate-400">In inventory</small>
         </div>
-        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
           <span class="text-xs text-slate-500 font-bold block">Low Stock</span>
           <strong id="dash-low-stock" class="text-2xl font-bold text-amber-600 mt-1 block">0</strong>
           <small class="text-[10px] text-slate-400">Need reorder</small>
         </div>
-        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
           <span class="text-xs text-slate-500 font-bold block">Expiry Alert</span>
           <strong id="dash-expiry-count" class="text-2xl font-bold text-red-600 mt-1 block">0</strong>
           <small class="text-[10px] text-slate-400">Under 60 days</small>
         </div>
-        <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
           <span class="text-xs text-slate-500 font-bold block">Stock Value</span>
           <strong id="dash-stock-value" class="text-2xl font-bold text-teal-700 mt-1 block">৳0</strong>
           <small class="text-[10px] text-slate-400">At cost price</small>
@@ -672,18 +575,18 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3">
-        <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
+        <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
           <span class="text-xs text-emerald-700 font-bold block uppercase tracking-wide">Today's Sales</span>
           <p class="text-2xl font-bold text-emerald-800 mt-1">৳ <span id="dash-sales">0.00</span></p>
         </div>
-        <div class="p-4 bg-red-50 border border-red-200 rounded-2xl">
+        <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
           <span class="text-xs text-red-700 font-bold block uppercase tracking-wide">Today's Expense</span>
           <p class="text-2xl font-bold text-red-800 mt-1">৳ <span id="dash-expenses">0.00</span></p>
         </div>
       </div>
 
-      <!-- DAILY SALES REPORT PANEL -->
-      <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3">
+      <!-- DAILY SALES REPORT -->
+      <div class="p-4 sm:p-5 bg-white rounded-xl border border-slate-200 shadow-sm space-y-3">
         <div class="flex justify-between items-center">
           <div>
             <h3 class="font-bold text-sm text-slate-800">Daily Sales Analytics & Download</h3>
@@ -699,15 +602,15 @@
           <input type="date" id="sales-report-date" onchange="renderDailySalesReport()" class="p-2 border rounded-xl text-xs bg-slate-50"/>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 text-xs py-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-          <div><span class="text-slate-500">Date Total Sales:</span> <b id="day-sales-total" class="text-teal-700">৳0.00</b></div>
-          <div><span class="text-slate-500">Transactions:</span> <b id="day-sales-count" class="text-slate-800">0</b></div>
+        <div class="grid grid-cols-2 gap-2 text-xs py-2 bg-slate-50 p-3 rounded-xl border border-slate-100 font-bold">
+          <div>Date Total: <span id="day-sales-total" class="text-teal-700">৳0.00</span></div>
+          <div>Transactions: <span id="day-sales-count" class="text-slate-800">0</span></div>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-xs text-left">
-            <thead class="bg-slate-100 text-slate-600">
-              <tr><th class="p-2">Invoice</th><th class="p-2">Time</th><th class="p-2">Net Sales</th><th class="p-2">Actions</th></tr>
+            <thead class="bg-slate-100 text-slate-600 font-bold">
+              <tr><th class="p-2">Invoice</th><th class="p-2">Time</th><th class="p-2">Net Sales</th><th class="p-2 text-right">Actions</th></tr>
             </thead>
             <tbody id="daily-sales-body" class="divide-y">
               <tr><td colspan="4" class="p-3 text-center text-slate-400">Loading daily sales...</td></tr>
@@ -717,7 +620,7 @@
       </div>
 
       <!-- Add Expense Form -->
-      <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3">
+      <div class="p-4 sm:p-5 bg-white rounded-xl border border-slate-200 shadow-sm space-y-3">
         <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Add Shop Expense</h3>
         <div>
           <input 
@@ -744,7 +647,7 @@
       </div>
 
       <!-- Alerts -->
-      <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-4 sm:p-5 bg-white rounded-xl border border-slate-200 shadow-sm">
         <h3 class="font-bold text-sm text-slate-700 mb-2 flex items-center gap-1.5">
           <span>⚠️</span> <span>Urgent Alerts</span>
         </h3>
@@ -753,6 +656,140 @@
     </section>
 
   </main>
+
+  <!-- ================= MULTI-MEDICINE INVOICE INTAKE MODAL ================= -->
+  <div id="multi-invoice-modal" class="fixed inset-0 bg-slate-950/80 z-[150] hidden flex items-center justify-center p-3 backdrop-blur-md">
+    <div class="bg-white w-full max-w-4xl rounded-2xl p-4 sm:p-6 shadow-2xl border border-slate-200 max-h-[94vh] overflow-y-auto space-y-4">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-slate-800">New Purchase Challan / Invoice</h2>
+          <p class="text-xs text-slate-400">একটি চালানে একই কোম্পানির একাধিক ওষুধ এক সাথে এন্ট্রি করুন</p>
+        </div>
+        <button onclick="closeMultiInvoiceModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center">&times;</button>
+      </div>
+
+      <!-- 1. Invoice General Info -->
+      <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
+        <span class="text-xs font-bold text-slate-700 uppercase tracking-wider block">১. চালানের সাধারণ তথ্য (Invoice Details)</span>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 text-xs">
+          <div class="sm:col-span-2">
+            <label class="block font-bold text-slate-600 mb-1">Company / Supplier Name *</label>
+            <input type="text" id="inv-supplier" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Invoice / Challan No. *</label>
+            <input type="text" id="inv-no" required placeholder="SQ-9842" class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Purchase Date *</label>
+            <input type="date" id="inv-date" required class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Medicine Line Item Form -->
+      <div class="p-4 bg-emerald-50/50 border border-emerald-200 rounded-xl space-y-3">
+        <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider block">২. ওষুধ যোগ করুন (Add Medicines into this Invoice)</span>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+          <div class="relative sm:col-span-2">
+            <label class="block font-bold text-slate-700 mb-1">Brand Name * (Type to search)</label>
+            <input type="text" id="line-name" oninput="searchMasterMedicinesLine(this.value)" autocomplete="off" placeholder="Type medicine name (e.g. Napa, Seclo)..." class="w-full p-2.5 border rounded-xl bg-white"/>
+            <div id="line-search-dropdown" class="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl max-h-48 overflow-y-auto hidden z-50 divide-y text-xs"></div>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Generic Name</label>
+            <input type="text" id="line-generic" placeholder="Auto-fills on brand select" class="w-full p-2.5 bg-slate-100 border rounded-xl"/>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2 text-xs">
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Batch No.</label>
+            <input type="text" id="line-batch" placeholder="B101" class="w-full p-2 border rounded-lg bg-white"/>
+          </div>
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Expiry Date *</label>
+            <input type="date" id="line-expiry" class="w-full p-2 border rounded-lg bg-white"/>
+          </div>
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Pack Qty</label>
+            <input type="number" id="line-pack-qty" value="1" oninput="calculateLineBuyPrice()" class="w-full p-2 border rounded-lg bg-white"/>
+          </div>
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Units / Pack</label>
+            <input type="number" id="line-pack-units" value="100" oninput="calculateLineBuyPrice()" class="w-full p-2 border rounded-lg bg-white"/>
+          </div>
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Trade Price (IP)</label>
+            <input type="number" step="0.01" id="line-ip" value="0" oninput="calculateLineBuyPrice()" class="w-full p-2 border rounded-lg bg-white font-bold"/>
+          </div>
+          <div>
+            <label class="block text-slate-600 font-semibold mb-1">Sell Price (৳)</label>
+            <input type="number" step="0.01" id="line-sell" placeholder="0.00" class="w-full p-2 border rounded-lg bg-white font-bold text-emerald-600"/>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1 text-xs">
+          <span class="text-slate-600">Calculated: <b id="line-total-units">100</b> units • Buy Price: <b id="line-unit-buy" class="text-emerald-700">৳0.00 /pc</b></span>
+          <button type="button" onclick="addItemToDraftInvoice()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex items-center gap-1.5 transition">
+            <span>＋</span> <span>Add This Medicine to Invoice</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Table of Added Medicines -->
+      <div class="border border-slate-200 rounded-xl overflow-hidden">
+        <div class="bg-slate-100 p-2.5 font-bold text-xs text-slate-700 flex justify-between items-center">
+          <span>৩. এই চালানে যোগ করা ওষুধগুলোর তালিকা (<span id="draft-items-count">0</span> medicines)</span>
+        </div>
+        <div class="overflow-x-auto max-h-48 overflow-y-auto">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-slate-50 text-slate-500 font-bold border-b">
+              <tr>
+                <th class="p-2">#</th>
+                <th class="p-2">Medicine Brand</th>
+                <th class="p-2">Batch/Exp</th>
+                <th class="p-2">Total Units</th>
+                <th class="p-2">Unit Buy</th>
+                <th class="p-2">Sell Price</th>
+                <th class="p-2">Line Total</th>
+                <th class="p-2 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="draft-items-body" class="divide-y divide-slate-100">
+              <tr><td colspan="8" class="p-4 text-center text-slate-400">কোনো ওষুধ এখনো যোগ করা হয়নি। উপরের ফর্ম থেকে ওষুধ সিলেক্ট করে যোগ করুন।</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4. Invoice Total, Payment & Submit -->
+      <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Invoice Total Amount</label>
+            <div class="p-2.5 bg-white border rounded-xl font-bold text-base text-slate-800" id="inv-total-display">৳ 0.00</div>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Paid Amount (৳)</label>
+            <input type="number" id="inv-paid" oninput="updateInvoiceDue()" value="0" class="w-full p-2.5 border rounded-xl bg-white font-bold text-emerald-600"/>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-600 mb-1">Remaining Due (বকেয়া)</label>
+            <div class="p-2.5 bg-white border rounded-xl font-bold text-base text-amber-600" id="inv-due-display">৳ 0.00</div>
+          </div>
+        </div>
+
+        <button type="button" onclick="saveFullInvoice()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg text-sm flex items-center justify-center gap-2 transition">
+          <span>💾</span> <span>Save Complete Invoice & Update All Stocks (এক ক্লিকে সব সেভ)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- PRINTABLE INVOICE / CASH MEMO MODAL -->
   <div id="invoice-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3">
@@ -798,24 +835,15 @@
 
         <div class="text-center pt-2 text-[10px] text-slate-500">
           <p>*** Thank You, Get Well Soon! ***</p>
-          <p class="text-[9px] mt-0.5">Software: Tasnim Medicine Corner</p>
         </div>
       </div>
 
-      <div class="mt-4 space-y-2 no-print">
-        <label for="print-paper-size" class="block text-xs font-bold text-slate-600">Print Format</label>
-        <div class="flex gap-2">
-          <select id="print-paper-size" onchange="updateInvoicePreviewFormat()" class="flex-1 min-w-0 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold bg-white text-slate-700">
-            <option value="receipt">POS Receipt (80mm)</option>
-            <option value="a4">A4 Full Page</option>
-            <option value="a5">A5 Landscape</option>
-          </select>
-          <button onclick="printInvoiceInSelectedFormat()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow">
-            <span>🖨️</span> <span>Print Memo</span>
-          </button>
-        </div>
-        <button onclick="closeInvoiceModal()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 rounded-xl text-xs">
-          ✕ Close
+      <div class="mt-4 flex gap-2 no-print">
+        <button onclick="window.print()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow">
+          <span>🖨️</span> <span>Print Memo</span>
+        </button>
+        <button onclick="closeInvoiceModal()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 rounded-xl text-xs">
+          Close
         </button>
       </div>
     </div>
@@ -843,54 +871,26 @@
     </div>
   </div>
 
+  <!-- MODERN CUSTOM ALERT DIALOG -->
+  <div id="custom-alert-modal" style="display: none;" class="fixed inset-0 bg-slate-900/60 z-[200] items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white w-full max-w-xs rounded-2xl p-6 shadow-2xl text-center space-y-3.5 border border-slate-100">
+      <div id="alert-modal-icon" class="w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-600">
+        ⚠️
+      </div>
+      <div>
+        <h3 id="alert-modal-title" class="font-bold text-base text-slate-800">Tasnim Medicine Corner</h3>
+        <p id="alert-modal-message" class="text-xs text-slate-600 mt-1 leading-relaxed"></p>
+      </div>
+      <button type="button" onclick="closeCustomAlert()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs shadow-md">
+        OK
+      </button>
+    </div>
+  </div>
+
   <!-- JavaScript Section -->
   <script>
-  // ================== CUSTOM PROFESSIONAL ALERT SYSTEM ==================
-    // ব্রাউজারের ডিফল্ট alert() কে আধুনিক ডায়ালগে রূপান্তর
-    window.alert = function(message) {
-      showCustomAlert(message);
-    };
-
-    function showCustomAlert(message, title = "Tasnim Medicine Corner") {
-      const modal = document.getElementById('custom-alert-modal');
-      const titleEl = document.getElementById('alert-modal-title');
-      const msgEl = document.getElementById('alert-modal-message');
-      const iconEl = document.getElementById('alert-modal-icon');
-
-      if (!modal || !msgEl) return;
-
-      titleEl.innerText = title;
-      msgEl.innerText = message;
-
-      const text = message.toLowerCase();
-      // মেসেজ অনুযায়ী স্বয়ংক্রিয়ভাবে রঙ ও আইকন পরিবর্তন
-      if (text.includes('success') || text.includes('সফল') || text.includes('যুক্ত')) {
-        iconEl.innerHTML = "✅";
-        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-emerald-100 text-emerald-700 shadow-inner";
-      } else if (text.includes('error') || text.includes('failed') || text.includes('ব্যর্থ') || text.includes('cannot') || text.includes('incorrect')) {
-        iconEl.innerHTML = "❌";
-        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-red-100 text-red-600 shadow-inner";
-      } else {
-        iconEl.innerHTML = "⚠️";
-        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-700 shadow-inner";
-      }
-
-      modal.style.display = 'flex';
-      modal.classList.remove('hidden');
-    }
-
-    function closeCustomAlert() {
-      const modal = document.getElementById('custom-alert-modal');
-      if (modal) {
-        modal.style.display = 'none';
-        modal.classList.add('hidden');
-      }
-    }
-  
-    // ================== SUPABASE CONFIG ==================
     const SUPABASE_URL = "https://yyilfyvwanundhkwrpvh.supabase.co";
     const SUPABASE_KEY = "sb_publishable_f2vp8P9rpfpOMmFKq5_HWg_fetxfMft";
-    
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let medicinesList = [];
@@ -900,17 +900,46 @@
     let currentEnteredPin = "";
     let activeStockFilter = "all";
     let yearlySalesCache = [];
+    let draftInvoiceItems = [];
 
-    // ================== AUTO-RECONNECT & NETWORK LISTENER ==================
+    window.alert = function(msg) { showCustomAlert(msg); };
+
+    function showCustomAlert(message, title = "Tasnim Medicine Corner") {
+      const modal = document.getElementById('custom-alert-modal');
+      const titleEl = document.getElementById('alert-modal-title');
+      const msgEl = document.getElementById('alert-modal-message');
+      const iconEl = document.getElementById('alert-modal-icon');
+
+      titleEl.innerText = title;
+      msgEl.innerText = message;
+      const text = message.toLowerCase();
+
+      if (text.includes('success') || text.includes('সফল') || text.includes('যুক্ত')) {
+        iconEl.innerHTML = "✅";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-emerald-100 text-emerald-700 shadow-inner";
+      } else if (text.includes('error') || text.includes('failed') || text.includes('ব্যর্থ') || text.includes('cannot')) {
+        iconEl.innerHTML = "❌";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-red-100 text-red-600 shadow-inner";
+      } else {
+        iconEl.innerHTML = "⚠️";
+        iconEl.className = "w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-700 shadow-inner";
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeCustomAlert() {
+      document.getElementById('custom-alert-modal').style.display = 'none';
+    }
+
     window.addEventListener('online', async () => {
       updateNetworkStatus(true);
-      console.log("Internet Restored! Auto-reloading data...");
-      await reloadAllData();
+      await fetchMedicines();
+      await loadDashboardData();
     });
 
     window.addEventListener('offline', () => {
       updateNetworkStatus(false);
-      console.warn("Internet Disconnected! Preserving offline data.");
     });
 
     function updateNetworkStatus(isOnline) {
@@ -918,46 +947,25 @@
       if (!badge) return;
       if (isOnline) {
         badge.innerText = 'Online';
-        badge.className = 'text-[10px] bg-emerald-700 px-2 py-0.5 rounded-full font-medium transition-all';
+        badge.className = 'bg-emerald-700 px-1.5 py-0.5 rounded font-medium';
       } else {
-        badge.innerText = 'Offline (No Net)';
-        badge.className = 'text-[10px] bg-red-600 px-2 py-0.5 rounded-full font-bold transition-all';
+        badge.innerText = 'Offline';
+        badge.className = 'bg-red-600 px-1.5 py-0.5 rounded font-bold';
       }
     }
 
-    async function reloadAllData() {
-      if (!navigator.onLine) return;
-      await fetchMedicines();
-      await loadDashboardData();
-      if (document.getElementById('tab-purchases')?.classList.contains('active')) {
-        await loadPurchaseRegister();
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('m-pack-size')) calculatePurchaseCost();
-      const pd = document.getElementById('m-purchase-date');
-      if (pd) pd.value = new Date().toISOString().split('T')[0];
-      updateNetworkStatus(navigator.onLine);
-    });
-
-    // ================== SECURITY PIN SYSTEM ==================
+    // ================== SECURITY PIN ==================
     function getAdminPin() {
       try {
         const pin = localStorage.getItem('tasnim_admin_pin');
         return (pin && pin.trim()) ? pin.trim() : '1234';
-      } catch (e) {
-        return '1234';
-      }
+      } catch (e) { return '1234'; }
     }
-    
     function getStaffPin() {
       try {
         const pin = localStorage.getItem('tasnim_staff_pin');
         return (pin && pin.trim()) ? pin.trim() : '0000';
-      } catch (e) {
-        return '0000';
-      }
+      } catch (e) { return '0000'; }
     }
 
     function onPinInput(val) {
@@ -982,17 +990,6 @@
       if (errMsg) errMsg.classList.add('hidden');
     }
 
-    document.addEventListener('keydown', (e) => {
-      const lockScreen = document.getElementById('app-lock-screen');
-      if (lockScreen && lockScreen.style.display !== 'none') {
-        if (e.key === 'Enter') {
-          submitPin();
-        } else if (e.key === 'Escape') {
-          clearPin();
-        }
-      }
-    });
-
     function submitPin() {
       const input = document.getElementById('pin-display');
       const entered = (input.value || currentEnteredPin || "").trim();
@@ -1014,20 +1011,19 @@
     function unlockApp() {
       const lockScreen = document.getElementById('app-lock-screen');
       lockScreen.style.display = 'none';
-      lockScreen.classList.add('hidden');
       clearPin();
 
       if (currentUserRole === 'staff') {
-        document.getElementById('user-role-badge').innerText = "Staff (Sales Only)";
-        document.getElementById('user-role-badge').className = "text-[10px] bg-amber-700 px-2 py-0.5 rounded-full font-bold";
+        document.getElementById('user-role-badge').innerText = "Staff";
+        document.getElementById('user-role-badge').className = "bg-amber-700 px-1.5 py-0.5 rounded font-bold text-amber-200";
         document.getElementById('btn-settings').style.display = 'none';
         document.getElementById('nav-stock').style.display = 'none';
         document.getElementById('nav-reports').style.display = 'none';
         document.getElementById('nav-purchases').style.display = 'none';
         switchTab('pos');
       } else {
-        document.getElementById('user-role-badge').innerText = "Admin (Owner)";
-        document.getElementById('user-role-badge').className = "text-[10px] bg-emerald-800 px-2 py-0.5 rounded-full font-bold";
+        document.getElementById('user-role-badge').innerText = "Admin";
+        document.getElementById('user-role-badge').className = "bg-slate-800 px-1.5 py-0.5 rounded font-bold text-emerald-400";
         document.getElementById('btn-settings').style.display = 'inline-block';
         document.getElementById('nav-stock').style.display = 'flex';
         document.getElementById('nav-reports').style.display = 'flex';
@@ -1041,14 +1037,10 @@
       clearPin();
       const lockScreen = document.getElementById('app-lock-screen');
       lockScreen.style.display = 'flex';
-      lockScreen.classList.remove('hidden');
     }
 
     function openSettingsModal() {
-      if (currentUserRole !== 'admin') {
-        alert("Only Admin can change PINs!");
-        return;
-      }
+      if (currentUserRole !== 'admin') { alert("Only Admin can change PIN!"); return; }
       document.getElementById('new-admin-pin').value = getAdminPin();
       document.getElementById('new-staff-pin').value = getStaffPin();
       document.getElementById('settings-modal').classList.remove('hidden');
@@ -1061,158 +1053,14 @@
     function saveNewPins() {
       const newAdmin = document.getElementById('new-admin-pin').value.trim();
       const newStaff = document.getElementById('new-staff-pin').value.trim();
-
-      if (!newAdmin || !newStaff) {
-        alert("PIN cannot be empty!");
-        return;
-      }
-
+      if (!newAdmin || !newStaff) { alert("PIN cannot be empty!"); return; }
       try {
         localStorage.setItem('tasnim_admin_pin', newAdmin);
         localStorage.setItem('tasnim_staff_pin', newStaff);
         alert("PINs successfully updated!");
-      } catch (err) {
-        console.error("Storage error:", err);
-      }
+      } catch (err) { console.error(err); }
       closeSettingsModal();
     }
-
-    window.onload = async () => {
-      lockApp();
-      updateNetworkStatus(navigator.onLine);
-      await fetchMedicines();
-      await loadDashboardData();
-    };
-
-    // ================== CLOUD SEARCH WITH "OTHER BRANDS" ==================
-    function searchMasterMedicines(query) {
-      clearTimeout(searchDebounceTimer);
-      const dropdown = document.getElementById('master-search-dropdown');
-
-      if (!query.trim() || query.length < 2) {
-        dropdown.classList.add('hidden');
-        return;
-      }
-
-      if (!navigator.onLine) {
-        dropdown.classList.remove('hidden');
-        dropdown.innerHTML = `<div class="p-3 text-red-500 text-center text-xs">Offline! You can continue typing to save manually.</div>`;
-        return;
-      }
-
-      searchDebounceTimer = setTimeout(async () => {
-        try {
-          const { data, error } = await db
-            .from('master_medicines')
-            .select('*')
-            .ilike('name', `%${query.trim()}%`)
-            .limit(20);
-
-          if (!error && data && data.length > 0) {
-            dropdown.classList.remove('hidden');
-            dropdown.innerHTML = `
-              <div class="p-2 bg-slate-50 text-[11px] font-bold text-slate-500 border-b flex justify-between">
-                <span>Search Results (${data.length})</span>
-                <span class="text-emerald-700">Click brand or "Other Brands"</span>
-              </div>
-            ` + data.map(item => `
-              <div onclick="selectMasterMedicine('${item.name.replace(/'/g, "\\'")}', '${(item.generic || '').replace(/'/g, "\\'")}')" 
-                   class="p-2.5 hover:bg-emerald-50 cursor-pointer active:bg-emerald-100 flex justify-between items-center gap-2">
-                <div class="min-w-0 flex-1">
-                  <div class="font-bold text-slate-800 text-xs">${item.name}</div>
-                  <div class="text-[11px] text-slate-500 truncate">${item.generic || 'No Generic'}</div>
-                  <div class="text-[10px] text-emerald-600 font-semibold truncate">${item.company || ''}</div>
-                </div>
-                <div class="flex flex-col items-end gap-1 shrink-0">
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold uppercase">
-                    ${item.type || 'Medicine'}
-                  </span>
-                  ${item.generic ? `
-                    <button 
-                      type="button" 
-                      onclick="event.stopPropagation(); loadOtherBrands('${item.generic.replace(/'/g, "\\'")}')" 
-                      class="text-[10px] bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-bold whitespace-nowrap shadow-sm">
-                      🔄 Other Brands
-                    </button>
-                  ` : ''}
-                </div>
-              </div>
-            `).join('');
-          } else {
-            dropdown.classList.remove('hidden');
-            dropdown.innerHTML = `
-              <div class="p-3 text-slate-400 text-center text-xs">
-                Not found in master cloud list. <br/>
-                <span class="text-emerald-600 font-semibold">You can continue typing to save manually!</span>
-              </div>
-            `;
-          }
-        } catch (err) {
-          console.error("Search Error:", err);
-        }
-      }, 250);
-    }
-
-    async function loadOtherBrands(genericName) {
-      const dropdown = document.getElementById('master-search-dropdown');
-      dropdown.classList.remove('hidden');
-      dropdown.innerHTML = `
-        <div class="p-3 text-center text-xs text-blue-600 font-bold">
-          Searching all brands for: <b>${genericName}</b>...
-        </div>
-      `;
-
-      try {
-        const { data, error } = await db
-          .from('master_medicines')
-          .select('*')
-          .ilike('generic', `%${genericName.trim()}%`)
-          .limit(40);
-
-        if (!error && data && data.length > 0) {
-          dropdown.innerHTML = `
-            <div class="p-2 bg-blue-50 text-[11px] font-bold text-blue-900 border-b flex justify-between items-center sticky top-0 z-10">
-              <span class="truncate">Generic: ${genericName} (${data.length} brands)</span>
-              <button type="button" onclick="searchMasterMedicines(document.getElementById('m-name').value)" class="text-xs text-blue-700 underline font-bold ml-2">✕ Back</button>
-            </div>
-          ` + data.map(item => `
-            <div onclick="selectMasterMedicine('${item.name.replace(/'/g, "\\'")}', '${(item.generic || '').replace(/'/g, "\\'")}')" 
-                 class="p-2.5 hover:bg-emerald-50 cursor-pointer active:bg-emerald-100 flex justify-between items-center border-b">
-              <div>
-                <div class="font-bold text-slate-800 text-xs">${item.name}</div>
-                <div class="text-[10px] text-emerald-700 font-semibold">${item.company || ''}</div>
-              </div>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">
-                ${item.type || 'Medicine'}
-              </span>
-            </div>
-          `).join('');
-        } else {
-          dropdown.innerHTML = `
-            <div class="p-3 text-center text-xs text-slate-500">
-              No other brands found for ${genericName}.
-              <br/><button onclick="searchMasterMedicines(document.getElementById('m-name').value)" class="text-blue-600 underline mt-1">Back</button>
-            </div>
-          `;
-        }
-      } catch (err) {
-        console.error("Load other brands error:", err);
-      }
-    }
-
-    function selectMasterMedicine(name, generic) {
-      document.getElementById('m-name').value = name;
-      document.getElementById('m-generic').value = generic;
-      document.getElementById('master-search-dropdown').classList.add('hidden');
-    }
-
-    document.addEventListener('click', (e) => {
-      const dropdown = document.getElementById('master-search-dropdown');
-      const input = document.getElementById('m-name');
-      if (dropdown && !dropdown.contains(e.target) && e.target !== input) {
-        dropdown.classList.add('hidden');
-      }
-    });
 
     // ================== TAB SWITCHER ==================
     function switchTab(tabId) {
@@ -1226,310 +1074,44 @@
 
       ['pos', 'stock', 'purchases', 'reports'].forEach(t => {
         const navBtn = document.getElementById('nav-' + t);
-        if(t === tabId) {
-          navBtn.classList.add('text-emerald-600');
-          navBtn.classList.remove('text-slate-400');
-        } else {
-          navBtn.classList.remove('text-emerald-600');
-          navBtn.classList.add('text-slate-400');
+        if (navBtn) {
+          if (t === tabId) {
+            navBtn.classList.add('text-emerald-600');
+            navBtn.classList.remove('text-slate-400');
+          } else {
+            navBtn.classList.remove('text-emerald-600');
+            navBtn.classList.add('text-slate-400');
+          }
         }
       });
-      if(tabId === 'reports' && navigator.onLine) loadDashboardData();
-      if(tabId === 'purchases' && navigator.onLine) loadPurchaseRegister();
+
+      if (tabId === 'reports' && navigator.onLine) loadDashboardData();
+      if (tabId === 'purchases' && navigator.onLine) loadPurchaseRegister();
     }
 
-    function openAddMedicineForm() {
-      cancelEdit();
-      document.getElementById('add-med-form').classList.remove('hidden');
-      document.getElementById('m-name').focus();
-    }
-
-    function cancelEdit() {
-      const form = document.getElementById('add-med-form');
-      form.reset();
-      document.getElementById('m-edit-id').value = '';
-      document.getElementById('form-title').innerText = "New Stock Entry";
-      document.getElementById('form-submit-btn').innerText = "Save to Stock";
-      document.getElementById('m-purchase-qty').value = 1;
-      document.getElementById('m-supplier').value = '';
-      document.getElementById('m-invoice-no').value = '';
-      document.getElementById('m-purchase-date').value = new Date().toISOString().split('T')[0];
-      document.getElementById('m-paid-amount').value = 0;
-      document.getElementById('m-payment-method').value = 'Cash';
-      document.getElementById('m-pack-size').value = "1x1's";
-      document.getElementById('m-pack-units').value = 1;
-      document.getElementById('m-unit-ip').value = 0;
-      document.getElementById('m-unit-vat').value = 0;
-      document.getElementById('m-line-discount').value = 0;
-      calculatePurchaseCost();
-      form.classList.add('hidden');
-    }
-
-    // ================== INVENTORY: ADD, EDIT, DELETE ==================
+    // ================== INVENTORY & POS ==================
     async function fetchMedicines() {
       try {
         const { data, error } = await db.from('medicines').select('*').order('name', { ascending: true });
-        if(!error && data) {
-          medicinesList = data; // Keep in memory
+        if (!error && data) {
+          medicinesList = data;
           renderStockList('');
           checkAlerts();
           if (typeof loadDashboardData === 'function') loadDashboardData();
         }
-      } catch (err) {
-        console.error("Supabase Error (preserved cached list):", err);
-        // Do not wipe medicinesList on error!
-        renderStockList('');
-      }
+      } catch (err) { console.error(err); }
     }
 
-    function getPackUnitCount(value) {
-      const normalized = String(value || '').toLowerCase().replace(/,/g, '.');
-      const matches = normalized.match(/\d+(?:\.\d+)?/g);
-      if (!matches || matches.length === 0) return 1;
-      const first = Number(matches[0]) || 1;
-      const second = matches.length > 1 ? (Number(matches[1]) || 1) : 1;
-      return Math.max(1, Math.round(first * second));
-    }
-
-    function calculatePurchaseCost() {
-      const get = id => Number(document.getElementById(id)?.value || 0);
-      const packSize = document.getElementById('m-pack-size');
-      const packUnitsInput = document.getElementById('m-pack-units');
-      const qtyPacks = Math.max(0, get('m-purchase-qty'));
-      const unitIP = Math.max(0, get('m-unit-ip'));
-      const unitVAT = Math.max(0, get('m-unit-vat'));
-      const discount = Math.max(0, get('m-line-discount'));
-      if (packSize && packUnitsInput && document.activeElement === packSize) {
-        packUnitsInput.value = getPackUnitCount(packSize.value);
-      }
-      const unitsPerPack = Math.max(1, Math.floor(get('m-pack-units') || 1));
-      const totalUnits = qtyPacks * unitsPerPack;
-      const totalIP = qtyPacks * unitIP;
-      const totalVAT = qtyPacks * unitVAT;
-      const netPurchase = Math.max(0, totalIP + totalVAT - discount);
-      const perUnitBuy = totalUnits > 0 ? netPurchase / totalUnits : 0;
-
-      const money = n => '৳' + n.toFixed(2);
-      const set = (id, value) => { const el = document.getElementById(id); if (el) el.innerText = value; };
-      set('m-total-ip', money(totalIP));
-      set('m-total-vat', money(totalVAT));
-      set('m-total-units', totalUnits.toLocaleString());
-      set('m-calculated-buy', money(perUnitBuy));
-
-      const buyField = document.getElementById('m-buy');
-      const stockField = document.getElementById('m-stock');
-      if (buyField) buyField.value = perUnitBuy.toFixed(4);
-      if (stockField) stockField.value = totalUnits;
-      return { totalUnits, perUnitBuy, totalIP, totalVAT, discount, unitsPerPack, qtyPacks };
-    }
-
-    function editMedicine(id) {
-      const med = medicinesList.find(m => m.id === id);
-      if(!med) return;
-
-      document.getElementById('m-edit-id').value = med.id;
-      document.getElementById('m-name').value = med.name || '';
-      document.getElementById('m-generic').value = med.generic || '';
-      document.getElementById('m-batch').value = med.batch || '';
-      document.getElementById('m-expiry').value = med.expiry_date || '';
-      document.getElementById('m-buy').value = med.buy_price || 0;
-      document.getElementById('m-sell').value = med.sell_price || 0;
-      document.getElementById('m-stock').value = med.stock || 0;
-
-      document.getElementById('form-title').innerText = "✏️ Edit Medicine Stock";
-      document.getElementById('form-submit-btn').innerText = "Update Stock";
-
-      const form = document.getElementById('add-med-form');
-      form.classList.remove('hidden');
-      form.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    async function deleteMedicine(id) {
-      if (!navigator.onLine) {
-        alert("Cannot delete while offline! Please connect to internet.");
-        return;
-      }
-      const med = medicinesList.find(m => m.id === id);
-      const name = med ? med.name : 'this item';
-
-      if (!confirm(`Are you sure you want to delete "${name}" from stock?`)) {
-        return;
-      }
-
-      const { error } = await db.from('medicines').delete().eq('id', id);
-      if (error) {
-        alert("Failed to delete: " + error.message);
-      } else {
-        alert("Medicine deleted successfully!");
-        fetchMedicines();
-      }
-    }
-
-    async function saveMedicine(e) {
-      e.preventDefault();
-      if (!navigator.onLine) {
-        alert("Cannot save stock while offline! Please connect to internet.");
-        return;
-      }
-
-      const editId = document.getElementById('m-edit-id').value;
-      const purchase = calculatePurchaseCost();
-      const supplierName = document.getElementById('m-supplier').value.trim();
-      const invoiceNo = document.getElementById('m-invoice-no').value.trim();
-      const purchaseDate = document.getElementById('m-purchase-date').value;
-      const paidAmount = Math.max(0, Number(document.getElementById('m-paid-amount').value || 0));
-      const paymentMethod = document.getElementById('m-payment-method').value;
-
-      const medData = {
-        name: document.getElementById('m-name').value.trim(),
-        generic: document.getElementById('m-generic').value.trim(),
-        batch: document.getElementById('m-batch').value.trim(),
-        expiry_date: document.getElementById('m-expiry').value,
-        buy_price: parseFloat(document.getElementById('m-buy').value) || 0,
-        sell_price: parseFloat(document.getElementById('m-sell').value) || 0,
-        stock: parseInt(document.getElementById('m-stock').value) || 0
-      };
-
-      if (editId) {
-        const { error } = await db.from('medicines').update(medData).eq('id', editId);
-        if (error) { alert("Update Failed: " + error.message); return; }
-        alert("Medicine stock updated successfully!");
-        cancelEdit();
-        fetchMedicines();
-        return;
-      }
-
-      const { data: medRows, error: medError } = await db.from('medicines').insert([medData]).select('id');
-      if (medError) { alert("Medicine Save Failed: " + medError.message); return; }
-      const savedMedicineId = medRows && medRows[0] ? medRows[0].id : null;
-
-      const lineTotal = Math.max(0, purchase.totalIP + purchase.totalVAT - purchase.discount);
-
-      if (supplierName && invoiceNo) {
-        const { data: existingInvoices } = await db.from('purchases')
-          .select('id,total_amount,paid_amount')
-          .eq('supplier_name', supplierName)
-          .eq('invoice_no', invoiceNo)
-          .limit(1);
-
-        let purchaseId = null;
-        if (existingInvoices && existingInvoices.length) {
-          const inv = existingInvoices[0];
-          purchaseId = inv.id;
-          const newTotal = Number(inv.total_amount || 0) + lineTotal;
-          await db.from('purchases').update({
-            total_amount: newTotal,
-            due_amount: Math.max(0, newTotal - Number(inv.paid_amount || 0))
-          }).eq('id', purchaseId);
-        } else {
-          const { data: invRows } = await db.from('purchases').insert([{
-            supplier_name: supplierName,
-            invoice_no: invoiceNo,
-            purchase_date: purchaseDate,
-            total_amount: lineTotal,
-            paid_amount: paidAmount,
-            due_amount: Math.max(0, lineTotal - paidAmount),
-            payment_method: paymentMethod
-          }]).select('id');
-          purchaseId = invRows && invRows[0] ? invRows[0].id : null;
-        }
-
-        if (purchaseId && savedMedicineId) {
-          await db.from('purchase_items').insert([{
-            purchase_id: purchaseId,
-            medicine_id: String(savedMedicineId),
-            medicine_name: medData.name,
-            batch_no: medData.batch,
-            expiry_date: medData.expiry_date,
-            pack_qty: purchase.qtyPacks,
-            pack_size: document.getElementById('m-pack-size').value,
-            units_per_pack: purchase.unitsPerPack,
-            total_units: purchase.totalUnits,
-            unit_ip: Number(document.getElementById('m-unit-ip').value || 0),
-            unit_vat: Number(document.getElementById('m-unit-vat').value || 0),
-            line_discount: purchase.discount,
-            line_total: lineTotal,
-            buy_price_per_unit: purchase.perUnitBuy
-          }]);
-        }
-      }
-
-      alert('Medicine and purchase record saved successfully!');
-      cancelEdit();
-      fetchMedicines();
-      loadPurchaseRegister();
-    }
-
-    function setStockFilter(filter, button) {
-      activeStockFilter = filter;
-      document.querySelectorAll('.stock-filter').forEach(el => {
-        el.className = "stock-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600";
-      });
-      if (button) button.className = "stock-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white";
-      const search = document.getElementById('stock-search');
-      renderStockList(search ? search.value : '');
-    }
-
-    function renderStockList(query) {
-      const container = document.getElementById('stock-list');
-      const q = (query || '').toLowerCase();
-      const today = new Date();
-      const filtered = medicinesList.filter(m => {
-        const matchesQuery = (m.name || '').toLowerCase().includes(q) || (m.generic || '').toLowerCase().includes(q);
-        const days = m.expiry_date ? Math.ceil((new Date(m.expiry_date) - today) / 86400000) : null;
-        const matchesFilter =
-          activeStockFilter === 'all' ||
-          (activeStockFilter === 'low' && Number(m.stock) <= 5) ||
-          (activeStockFilter === 'expiring' && days !== null && days > 0 && days <= 60) ||
-          (activeStockFilter === 'expired' && days !== null && days <= 0);
-        return matchesQuery && matchesFilter;
-      });
-
-      const count = document.getElementById('stock-count');
-      if (count) count.innerText = `${filtered.length} ITEMS`;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<p class="py-6 text-center text-slate-400 text-xs">No matching medicine found.</p>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map(m => {
-        const days = m.expiry_date ? Math.ceil((new Date(m.expiry_date) - today) / 86400000) : null;
-        const expiryText = days !== null && days <= 0 ? '<span class="text-red-600 font-bold">Expired</span>' : (days !== null && days <= 60 ? `<span class="text-amber-600 font-bold">${days} days left</span>` : 'In date');
-        return `
-        <div class="stock-item-row">
-          <div class="flex-1 min-w-0">
-            <h4 class="font-bold text-slate-800 text-sm leading-tight">${m.name}</h4>
-            <div class="text-[11px] text-slate-500">${m.generic || 'Generic not set'}</div>
-            <div class="text-[10px] text-slate-400 mt-1 flex gap-2">
-              <span>Batch: ${m.batch || '-'}</span>
-              <span>Exp: ${m.expiry_date || '-'}</span>
-              <span>${expiryText}</span>
-            </div>
-          </div>
-          <div class="text-right shrink-0">
-            <b class="text-sm text-slate-800">৳ ${Number(m.sell_price || 0).toFixed(2)}</b>
-            <span class="block text-xs font-bold ${Number(m.stock) <= 5 ? 'text-red-600' : 'text-emerald-700'}">${m.stock} in stock</span>
-            <div class="flex gap-1 justify-end mt-1.5">
-              <button onclick="editMedicine(${m.id})" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-xs font-bold">Edit</button>
-              <button onclick="deleteMedicine(${m.id})" class="px-2 py-0.5 bg-red-50 hover:bg-red-100 text-red-600 rounded text-xs font-bold">Delete</button>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    // ================== POS / BILLING ==================
     function searchMedicinePOS(query) {
       const box = document.getElementById('pos-search-results');
-      if(!query.trim()) { box.classList.add('hidden'); return; }
+      if (!query.trim()) { box.classList.add('hidden'); return; }
 
       const filtered = medicinesList.filter(m => 
         m.name.toLowerCase().includes(query.toLowerCase()) || 
         (m.generic && m.generic.toLowerCase().includes(query.toLowerCase()))
       );
 
-      if(filtered.length > 0) {
+      if (filtered.length > 0) {
         box.classList.remove('hidden');
         box.innerHTML = filtered.map(m => `
           <div onclick="addToCart(${m.id})" class="p-3 hover:bg-slate-50 cursor-pointer flex justify-between items-center bg-white text-xs gap-2">
@@ -1540,10 +1122,7 @@
             <div class="flex items-center gap-2 shrink-0">
               <div class="font-bold text-emerald-600 text-sm">৳ ${m.sell_price}</div>
               ${m.generic ? `
-                <button 
-                  type="button" 
-                  onclick="event.stopPropagation(); filterPOSAlternatives('${m.generic.replace(/'/g, "\\'")}')" 
-                  class="text-[10px] bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg font-semibold">
+                <button type="button" onclick="event.stopPropagation(); filterPOSAlternatives('${m.generic.replace(/'/g, "\\'")}')" class="text-[10px] bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg font-semibold">
                   🔄 Alt
                 </button>
               ` : ''}
@@ -1563,18 +1142,12 @@
 
     function addToCart(medId) {
       const med = medicinesList.find(m => m.id === medId);
-      if(!med || med.stock <= 0) {
-        alert("Sorry, this item is out of stock!");
-        return;
-      }
+      if (!med || med.stock <= 0) { alert("Sorry, this item is out of stock!"); return; }
 
       const existing = cart.find(item => item.id === medId);
-      if(existing) {
-        if(existing.qty < med.stock) {
-          existing.qty += 1;
-        } else {
-          alert("Cannot exceed available stock!");
-        }
+      if (existing) {
+        if (existing.qty < med.stock) { existing.qty += 1; }
+        else { alert("Cannot exceed available stock!"); }
       } else {
         cart.push({ ...med, qty: 1 });
       }
@@ -1586,14 +1159,13 @@
 
     function updateCartQty(medId, delta) {
       const item = cart.find(i => i.id === medId);
-      if(!item) return;
-
+      if (!item) return;
       const med = medicinesList.find(m => m.id === medId);
       item.qty += delta;
 
-      if(item.qty <= 0) {
+      if (item.qty <= 0) {
         cart = cart.filter(i => i.id !== medId);
-      } else if(item.qty > med.stock) {
+      } else if (item.qty > med.stock) {
         item.qty = med.stock;
         alert("Maximum stock reached!");
       }
@@ -1602,8 +1174,8 @@
 
     function renderCart() {
       const box = document.getElementById('pos-cart-items');
-      if(cart.length === 0) {
-        box.innerHTML = `<p class="text-xs text-slate-400 text-center py-8">No items added to cart</p>`;
+      if (cart.length === 0) {
+        box.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">No items added to cart</p>`;
       } else {
         box.innerHTML = cart.map(item => `
           <div class="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl border border-slate-200">
@@ -1632,11 +1204,8 @@
     }
 
     async function processSale() {
-      if(cart.length === 0) { alert("Cart is empty!"); return; }
-      if(!navigator.onLine) {
-        alert("Offline! Cannot process sale without internet. Please connect internet.");
-        return;
-      }
+      if (cart.length === 0) { alert("Cart is empty!"); return; }
+      if (!navigator.onLine) { alert("Offline! Connect to internet to complete sale."); return; }
 
       const subtotal = cart.reduce((acc, item) => acc + (item.sell_price * item.qty), 0);
       const discount = parseFloat(document.getElementById('cart-discount').value) || 0;
@@ -1649,12 +1218,9 @@
         items: cart
       }]).select();
 
-      if(saleErr) {
-        alert("Failed to save sale: " + saleErr.message);
-        return;
-      }
+      if (saleErr) { alert("Failed to save sale: " + saleErr.message); return; }
 
-      for(let item of cart) {
+      for (let item of cart) {
         const newStock = item.stock - item.qty;
         await db.from('medicines').update({ stock: newStock }).eq('id', item.id);
       }
@@ -1689,290 +1255,508 @@
       document.getElementById('invoice-modal').classList.remove('hidden');
     }
 
-    function printInvoiceInSelectedFormat() {
-      window.print();
-    }
-
     function closeInvoiceModal() {
       document.getElementById('invoice-modal').classList.add('hidden');
     }
 
-    // ================== EXPENSES & DASHBOARD ==================
-    async function addExpense() {
-      if (!navigator.onLine) {
-        alert("Cannot add expense while offline! Connect to internet.");
-        return;
-      }
-      if (currentUserRole !== 'admin') {
-        alert("Only Admin can add expenses!");
-        return;
-      }
-
-      const titleInput = document.getElementById('exp-title');
-      const amountInput = document.getElementById('exp-amount');
-
-      const title = titleInput.value.trim();
-      const amount = parseFloat(amountInput.value);
-
-      if(!title || isNaN(amount) || amount <= 0) { 
-        alert("Please provide valid description and amount."); 
-        return; 
-      }
-
-      const { error } = await db.from('expenses').insert([{ title, amount }]);
-      if(!error) {
-        alert("Expense added successfully!");
-        titleInput.value = '';
-        amountInput.value = '';
-        loadDashboardData();
-      } else {
-        alert("Failed: " + error.message);
-      }
+    // ================== MULTI-MEDICINE PURCHASE INTAKE ==================
+    function openMultiInvoiceModal() {
+      draftInvoiceItems = [];
+      document.getElementById('inv-supplier').value = '';
+      document.getElementById('inv-no').value = '';
+      document.getElementById('inv-date').value = new Date().toISOString().split('T')[0];
+      document.getElementById('inv-paid').value = 0;
+      renderDraftInvoiceTable();
+      clearLineInput();
+      document.getElementById('multi-invoice-modal').classList.remove('hidden');
     }
 
-    let purchaseRegisterCache = [];
+    function closeMultiInvoiceModal() {
+      document.getElementById('multi-invoice-modal').classList.add('hidden');
+    }
 
+    function clearLineInput() {
+      document.getElementById('line-name').value = '';
+      document.getElementById('line-generic').value = '';
+      document.getElementById('line-batch').value = '';
+      document.getElementById('line-expiry').value = '';
+      document.getElementById('line-pack-qty').value = 1;
+      document.getElementById('line-pack-units').value = 100;
+      document.getElementById('line-ip').value = 0;
+      document.getElementById('line-sell').value = '';
+      calculateLineBuyPrice();
+    }
+
+    function calculateLineBuyPrice() {
+      const packQty = Math.max(0, Number(document.getElementById('line-pack-qty').value || 0));
+      const unitsPerPack = Math.max(1, Number(document.getElementById('line-pack-units').value || 1));
+      const ip = Math.max(0, Number(document.getElementById('line-ip').value || 0));
+
+      const totalUnits = packQty * unitsPerPack;
+      const unitBuy = totalUnits > 0 ? (packQty * ip) / totalUnits : 0;
+
+      document.getElementById('line-total-units').innerText = totalUnits;
+      document.getElementById('line-unit-buy').innerText = '৳' + unitBuy.toFixed(2) + ' /pc';
+      return { totalUnits, unitBuy, lineTotal: packQty * ip };
+    }
+
+    function searchMasterMedicinesLine(query) {
+      clearTimeout(searchDebounceTimer);
+      const dropdown = document.getElementById('line-search-dropdown');
+      if (!query.trim() || query.length < 2) { dropdown.classList.add('hidden'); return; }
+
+      searchDebounceTimer = setTimeout(async () => {
+        try {
+          const { data } = await db.from('master_medicines').select('*').ilike('name', `%${query.trim()}%`).limit(15);
+          if (data && data.length > 0) {
+            dropdown.classList.remove('hidden');
+            dropdown.innerHTML = data.map(item => `
+              <div onclick="selectMasterLine('${item.name.replace(/'/g, "\\'")}', '${(item.generic || '').replace(/'/g, "\\'")}')" class="p-2.5 hover:bg-emerald-50 cursor-pointer flex justify-between items-center bg-white text-xs">
+                <div>
+                  <div class="font-bold text-slate-800">${item.name}</div>
+                  <div class="text-[10px] text-slate-400">${item.generic || ''} • ${item.company || ''}</div>
+                </div>
+              </div>
+            `).join('');
+          } else { dropdown.classList.add('hidden'); }
+        } catch (e) { console.error(e); }
+      }, 250);
+    }
+
+    function selectMasterLine(name, generic) {
+      document.getElementById('line-name').value = name;
+      document.getElementById('line-generic').value = generic;
+      document.getElementById('line-search-dropdown').classList.add('hidden');
+    }
+
+    function addItemToDraftInvoice() {
+      const name = document.getElementById('line-name').value.trim();
+      const generic = document.getElementById('line-generic').value.trim();
+      const batch = document.getElementById('line-batch').value.trim();
+      const expiry = document.getElementById('line-expiry').value;
+      const sellPrice = parseFloat(document.getElementById('line-sell').value);
+      const { totalUnits, unitBuy, lineTotal } = calculateLineBuyPrice();
+
+      if (!name) { alert("Please enter medicine brand name"); return; }
+      if (!expiry) { alert("Please select expiry date"); return; }
+      if (isNaN(sellPrice) || sellPrice <= 0) { alert("Please enter a valid selling price"); return; }
+      if (totalUnits <= 0) { alert("Total units must be greater than 0"); return; }
+
+      draftInvoiceItems.push({
+        name, generic, batch, expiry,
+        packQty: Number(document.getElementById('line-pack-qty').value || 1),
+        unitsPerPack: Number(document.getElementById('line-pack-units').value || 1),
+        unitIP: Number(document.getElementById('line-ip').value || 0),
+        totalUnits, unitBuy, sellPrice, lineTotal
+      });
+
+      renderDraftInvoiceTable();
+      clearLineInput();
+    }
+
+    function removeDraftItem(index) {
+      draftInvoiceItems.splice(index, 1);
+      renderDraftInvoiceTable();
+    }
+
+    function renderDraftInvoiceTable() {
+      const tbody = document.getElementById('draft-items-body');
+      const countEl = document.getElementById('draft-items-count');
+      countEl.innerText = draftInvoiceItems.length;
+
+      if (draftInvoiceItems.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-slate-400">কোনো ওষুধ এখনো যোগ করা হয়নি। উপরের ফর্ম থেকে ওষুধ সিলেক্ট করে যোগ করুন।</td></tr>`;
+      } else {
+        tbody.innerHTML = draftInvoiceItems.map((item, idx) => `
+          <tr class="hover:bg-slate-50">
+            <td class="p-2 font-bold">${idx + 1}</td>
+            <td class="p-2 font-bold text-slate-800">${item.name}</td>
+            <td class="p-2">${item.batch || '-'}<br><span class="text-[10px] text-slate-400">${item.expiry}</span></td>
+            <td class="p-2 font-bold">${item.totalUnits}</td>
+            <td class="p-2 font-semibold">৳${item.unitBuy.toFixed(2)}</td>
+            <td class="p-2 font-bold text-emerald-600">৳${item.sellPrice.toFixed(2)}</td>
+            <td class="p-2 font-black text-slate-900">৳${item.lineTotal.toFixed(2)}</td>
+            <td class="p-2 text-right"><button onclick="removeDraftItem(${idx})" class="text-red-500 font-bold hover:underline">Remove</button></td>
+          </tr>
+        `).join('');
+      }
+
+      updateInvoiceTotals();
+    }
+
+    function updateInvoiceTotals() {
+      const totalAmount = draftInvoiceItems.reduce((sum, item) => sum + item.lineTotal, 0);
+      document.getElementById('inv-total-display').innerText = '৳ ' + totalAmount.toFixed(2);
+      updateInvoiceDue();
+    }
+
+    function updateInvoiceDue() {
+      const total = draftInvoiceItems.reduce((sum, item) => sum + item.lineTotal, 0);
+      const paid = Math.max(0, Number(document.getElementById('inv-paid').value || 0));
+      const due = Math.max(0, total - paid);
+      document.getElementById('inv-due-display').innerText = '৳ ' + due.toFixed(2);
+    }
+
+    async function saveFullInvoice() {
+      if (!navigator.onLine) { alert("Offline! Connect internet to save invoice."); return; }
+      const supplier = document.getElementById('inv-supplier').value.trim();
+      const invoiceNo = document.getElementById('inv-no').value.trim();
+      const purchaseDate = document.getElementById('inv-date').value;
+      const paid = Math.max(0, Number(document.getElementById('inv-paid').value || 0));
+
+      if (!supplier || !invoiceNo || !purchaseDate) {
+        alert("Please enter Supplier Name, Invoice Number, and Date");
+        return;
+      }
+      if (draftInvoiceItems.length === 0) {
+        alert("Please add at least one medicine to this invoice!");
+        return;
+      }
+
+      const totalAmount = draftInvoiceItems.reduce((sum, item) => sum + item.lineTotal, 0);
+      const dueAmount = Math.max(0, totalAmount - paid);
+
+      // 1. Insert into Purchases
+      const { data: invData, error: invErr } = await db.from('purchases').insert([{
+        supplier_name: supplier,
+        invoice_no: invoiceNo,
+        purchase_date: purchaseDate,
+        total_amount: totalAmount,
+        paid_amount: paid,
+        due_amount: dueAmount,
+        payment_method: "Cash"
+      }]).select();
+
+      if (invErr) { alert("Failed to save invoice: " + invErr.message); return; }
+      const purchaseId = invData && invData[0] ? invData[0].id : null;
+
+      // 2. Insert medicines into medicines & purchase_items
+      for (let item of draftInvoiceItems) {
+        const { data: medData } = await db.from('medicines').insert([{
+          name: item.name,
+          generic: item.generic,
+          batch: item.batch,
+          expiry_date: item.expiry,
+          buy_price: item.unitBuy,
+          sell_price: item.sellPrice,
+          stock: item.totalUnits
+        }]).select();
+
+        const medId = (medData && medData[0]) ? medData[0].id : null;
+
+        if (purchaseId && medId) {
+          await db.from('purchase_items').insert([{
+            purchase_id: purchaseId,
+            medicine_id: String(medId),
+            medicine_name: item.name,
+            batch_no: item.batch,
+            expiry_date: item.expiry,
+            pack_qty: item.packQty,
+            pack_size: item.unitsPerPack + "s",
+            units_per_pack: item.unitsPerPack,
+            total_units: item.totalUnits,
+            unit_ip: item.unitIP,
+            line_total: item.lineTotal,
+            buy_price_per_unit: item.unitBuy
+          }]);
+        }
+      }
+
+      alert("Invoice #" + invoiceNo + " with " + draftInvoiceItems.length + " medicines saved successfully!");
+      closeMultiInvoiceModal();
+      fetchMedicines();
+      loadPurchaseRegister();
+    }
+
+    // ================== INVENTORY QUICK EDIT ==================
+    function editMedicine(id) {
+      const med = medicinesList.find(m => m.id === id);
+      if (!med) return;
+
+      document.getElementById('m-edit-id').value = med.id;
+      document.getElementById('m-name').value = med.name || '';
+      document.getElementById('m-generic').value = med.generic || '';
+      document.getElementById('m-batch').value = med.batch || '';
+      document.getElementById('m-expiry').value = med.expiry_date || '';
+      document.getElementById('m-buy').value = med.buy_price || 0;
+      document.getElementById('m-sell').value = med.sell_price || 0;
+      document.getElementById('m-stock').value = med.stock || 0;
+
+      document.getElementById('quick-edit-modal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      document.getElementById('quick-edit-modal').classList.add('hidden');
+    }
+
+    async function saveMedicine(e) {
+      e.preventDefault();
+      const editId = document.getElementById('m-edit-id').value;
+      const medData = {
+        name: document.getElementById('m-name').value.trim(),
+        generic: document.getElementById('m-generic').value.trim(),
+        batch: document.getElementById('m-batch').value.trim(),
+        expiry_date: document.getElementById('m-expiry').value,
+        buy_price: parseFloat(document.getElementById('m-buy').value) || 0,
+        sell_price: parseFloat(document.getElementById('m-sell').value) || 0,
+        stock: parseInt(document.getElementById('m-stock').value) || 0
+      };
+
+      if (editId) {
+        await db.from('medicines').update(medData).eq('id', editId);
+      } else {
+        await db.from('medicines').insert([medData]);
+      }
+
+      alert("Stock updated successfully!");
+      closeEditModal();
+      fetchMedicines();
+    }
+
+    async function deleteMedicine(id) {
+      if (!confirm("Are you sure you want to delete this medicine?")) return;
+      await db.from('medicines').delete().eq('id', id);
+      fetchMedicines();
+    }
+
+    function setStockFilter(filter, btn) {
+      activeStockFilter = filter;
+      document.querySelectorAll('.stock-filter').forEach(b => {
+        b.className = "stock-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600";
+      });
+      btn.className = "stock-filter px-3 py-1.5 rounded-lg bg-slate-900 text-white";
+      renderStockList(document.getElementById('stock-search').value);
+    }
+
+    function renderStockList(query) {
+      const container = document.getElementById('stock-list');
+      const q = (query || '').toLowerCase();
+      const today = new Date();
+
+      const filtered = medicinesList.filter(m => {
+        const match = (m.name || '').toLowerCase().includes(q) || (m.generic || '').toLowerCase().includes(q);
+        const days = m.expiry_date ? Math.ceil((new Date(m.expiry_date) - today) / 86400000) : null;
+        const matchesFilter =
+          activeStockFilter === 'all' ||
+          (activeStockFilter === 'low' && m.stock <= 5) ||
+          (activeStockFilter === 'expiring' && days !== null && days > 0 && days <= 60) ||
+          (activeStockFilter === 'expired' && days !== null && days <= 0);
+        return match && matchesFilter;
+      });
+
+      document.getElementById('stock-count').innerText = `${filtered.length} ITEMS`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p class="py-8 text-center text-slate-400 text-xs">No matching inventory items.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(m => {
+        const days = m.expiry_date ? Math.ceil((new Date(m.expiry_date) - today) / 86400000) : null;
+        return `
+          <div class="py-2.5 flex justify-between items-center gap-2">
+            <div class="min-w-0 flex-1">
+              <h4 class="font-bold text-slate-800 text-xs">${m.name} <span class="font-normal text-slate-500">(${m.generic || 'N/A'})</span></h4>
+              <div class="text-[10px] text-slate-400 mt-0.5">
+                Batch: ${m.batch || '-'} | Exp: ${m.expiry_date || '-'} | Buy: ৳${m.buy_price}
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <div class="text-right">
+                <div class="font-bold text-slate-700 text-xs">৳ ${m.sell_price}</div>
+                <span class="text-[10px] px-1.5 py-0.5 rounded font-bold ${m.stock <= 10 ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-700'}">
+                  Stock: ${m.stock}
+                </span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button onclick="editMedicine(${m.id})" title="Edit" class="w-7 h-7 bg-blue-50 active:bg-blue-200 text-blue-600 rounded-lg flex items-center justify-center text-xs font-bold border border-blue-200">
+                  ✏️
+                </button>
+                <button onclick="deleteMedicine(${m.id})" title="Delete" class="w-7 h-7 bg-red-50 active:bg-red-200 text-red-600 rounded-lg flex items-center justify-center text-xs font-bold border border-red-200">
+                  🗑️
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ================== PURCHASES & DASHBOARD ==================
     async function loadPurchaseRegister() {
       const body = document.getElementById('purchase-register-body');
       if (!body) return;
-      if (!navigator.onLine && purchaseRegisterCache.length > 0) {
-        renderPurchaseRegister();
-        return;
-      }
+      const { data } = await db.from('purchases').select('*').order('purchase_date', { ascending: false }).limit(200);
+      const rows = data || [];
 
-      const { data, error } = await db.from('purchases').select('*').order('purchase_date', { ascending: false }).limit(300);
-      if (error) {
-        if (purchaseRegisterCache.length === 0) {
-          body.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-red-500">Error: ${error.message}</td></tr>`;
-        }
-        return;
-      }
-      purchaseRegisterCache = data || [];
-      const total = purchaseRegisterCache.reduce((s, x) => s + Number(x.total_amount || 0), 0);
-      const paid = purchaseRegisterCache.reduce((s, x) => s + Number(x.paid_amount || 0), 0);
-      const due = purchaseRegisterCache.reduce((s, x) => s + Number(x.due_amount || 0), 0);
+      const total = rows.reduce((s, x) => s + Number(x.total_amount || 0), 0);
+      const paid = rows.reduce((s, x) => s + Number(x.paid_amount || 0), 0);
+      const due = rows.reduce((s, x) => s + Number(x.due_amount || 0), 0);
+
       document.getElementById('purchase-total-value').innerText = '৳' + total.toFixed(2);
       document.getElementById('purchase-paid-value').innerText = '৳' + paid.toFixed(2);
       document.getElementById('purchase-due-value').innerText = '৳' + due.toFixed(2);
-      renderPurchaseRegister();
-    }
 
-    function renderPurchaseRegister() {
-      const body = document.getElementById('purchase-register-body');
-      if (!body) return;
-      const q = (document.getElementById('purchase-search')?.value || '').toLowerCase();
-      const rows = purchaseRegisterCache.filter(x =>
-        String(x.supplier_name || '').toLowerCase().includes(q) ||
-        String(x.invoice_no || '').toLowerCase().includes(q)
-      );
-      if (!rows.length) {
-        body.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-slate-400">No purchase invoices found.</td></tr>';
-        return;
-      }
-      body.innerHTML = rows.map(x => `<tr>
-        <td>${x.purchase_date || '-'}</td>
-        <td><b>${x.invoice_no || '-'}</b></td>
-        <td>${x.supplier_name || '-'}</td>
-        <td>৳${Number(x.total_amount || 0).toFixed(2)}</td>
-        <td class="text-teal-700 font-bold">৳${Number(x.paid_amount || 0).toFixed(2)}</td>
-        <td class="${Number(x.due_amount || 0) > 0 ? 'text-amber-600 font-bold' : 'text-teal-700'}">৳${Number(x.due_amount || 0).toFixed(2)}</td>
-        <td>
-          <button type="button" class="text-blue-600 font-bold mr-2 text-xs" onclick="editPurchasePayment('${x.id}')">Edit</button>
-          <button type="button" class="text-red-600 font-bold text-xs" onclick="deletePurchaseInvoice('${x.id}')">Delete</button>
-        </td>
-      </tr>`).join('');
-    }
-
-    async function editPurchasePayment(id) {
-      if (!navigator.onLine) { alert("Offline!"); return; }
-      const invoice = purchaseRegisterCache.find(x => String(x.id) === String(id));
-      if (!invoice) return;
-      const current = Number(invoice.paid_amount || 0);
-      const answer = prompt(`Invoice ${invoice.invoice_no || ''}\nTotal: ৳${Number(invoice.total_amount || 0).toFixed(2)}\nEnter updated paid amount:`, current.toFixed(2));
-      if (answer === null) return;
-      const paid = Number(answer);
-      const total = Number(invoice.total_amount || 0);
-      if (!Number.isFinite(paid) || paid < 0 || paid > total) { alert('Paid amount must be between 0 and invoice total.'); return; }
-      const { error } = await db.from('purchases').update({ paid_amount: paid, due_amount: Math.max(0, total - paid) }).eq('id', id);
-      if (error) { alert('Payment update failed: ' + error.message); return; }
-      alert('Purchase payment updated.');
-      loadPurchaseRegister();
+      body.innerHTML = rows.map(x => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-2.5">${x.purchase_date || '-'}</td>
+          <td class="p-2.5 font-bold">${x.invoice_no || '-'}</td>
+          <td class="p-2.5">${x.supplier_name || '-'}</td>
+          <td class="p-2.5">৳${Number(x.total_amount || 0).toFixed(2)}</td>
+          <td class="p-2.5 text-teal-700 font-bold">৳${Number(x.paid_amount || 0).toFixed(2)}</td>
+          <td class="p-2.5 ${Number(x.due_amount) > 0 ? 'text-amber-600 font-bold' : 'text-teal-700'}">৳${Number(x.due_amount || 0).toFixed(2)}</td>
+          <td class="p-2.5 text-right"><button onclick="deletePurchaseInvoice('${x.id}')" class="text-red-500 font-bold hover:underline">Delete</button></td>
+        </tr>
+      `).join('');
     }
 
     async function deletePurchaseInvoice(id) {
-      if (!navigator.onLine) { alert("Offline!"); return; }
-      const invoice = purchaseRegisterCache.find(x => String(x.id) === String(id));
-      if (!invoice) return;
-      if (!confirm(`Delete purchase invoice ${invoice.invoice_no || ''}?`)) return;
+      if (!confirm("Delete this invoice record?")) return;
       await db.from('purchases').delete().eq('id', id);
-      alert('Purchase invoice deleted.');
       loadPurchaseRegister();
     }
 
+    async function addExpense() {
+      const t = document.getElementById('exp-title').value.trim();
+      const a = parseFloat(document.getElementById('exp-amount').value);
+      if (!t || isNaN(a) || a <= 0) { alert("Enter valid description and amount"); return; }
+
+      await db.from('expenses').insert([{ title: t, amount: a }]);
+      document.getElementById('exp-title').value = '';
+      document.getElementById('exp-amount').value = '';
+      alert("Expense logged successfully!");
+      loadDashboardData();
+    }
+
+    async function loadDashboardData() {
+      const today = new Date().toISOString().split('T')[0];
+
+      if (navigator.onLine) {
+        const { data: sales } = await db.from('sales').select('net_amount').gte('created_at', today);
+        const totalSales = sales ? sales.reduce((a, b) => a + Number(b.net_amount || 0), 0) : 0;
+        document.getElementById('dash-sales').innerText = totalSales.toFixed(2);
+
+        const { data: exp } = await db.from('expenses').select('amount').gte('created_at', today);
+        const totalExp = exp ? exp.reduce((a, b) => a + Number(b.amount || 0), 0) : 0;
+        document.getElementById('dash-expenses').innerText = totalExp.toFixed(2);
+      }
+
+      const totalItems = medicinesList.length;
+      const lowStock = medicinesList.filter(m => m.stock <= 5).length;
+      const expiryWatch = medicinesList.filter(m => {
+        if (!m.expiry_date) return false;
+        const days = Math.ceil((new Date(m.expiry_date) - new Date()) / 86400000);
+        return days <= 60;
+      }).length;
+      const stockVal = medicinesList.reduce((sum, m) => sum + (Number(m.buy_price || 0) * Number(m.stock || 0)), 0);
+
+      document.getElementById('dash-medicine-count').innerText = totalItems;
+      document.getElementById('dash-low-stock').innerText = lowStock;
+      document.getElementById('dash-expiry-count').innerText = expiryWatch;
+      document.getElementById('dash-stock-value').innerText = '৳' + stockVal.toLocaleString('en-BD', { maximumFractionDigits: 0 });
+
+      loadYearlySalesData();
+    }
+
     async function loadYearlySalesData() {
-      if (!navigator.onLine && yearlySalesCache.length > 0) {
-        renderDailySalesReport();
-        return;
-      }
-      const { data, error } = await db.from('sales')
-        .select('id, created_at, net_amount, total_amount, discount, items')
-        .order('created_at', { ascending: false })
-        .limit(10000);
-      if (!error && data) {
-        yearlySalesCache = data;
-      }
-      const dateInput = document.getElementById('sales-report-date');
-      if (dateInput && !dateInput.value) {
-        const now = new Date();
-        dateInput.value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const { data } = await db.from('sales').select('*').order('created_at', { ascending: false }).limit(2000);
+      yearlySalesCache = data || [];
+      const dInput = document.getElementById('sales-report-date');
+      if (dInput && !dInput.value) {
+        dInput.value = new Date().toISOString().split('T')[0];
       }
       renderDailySalesReport();
     }
 
-    function getSelectedDateSales() {
-      const selected = document.getElementById('sales-report-date')?.value;
-      if (!selected) return [];
-      return yearlySalesCache.filter(s => {
-        if (!s.created_at) return false;
-        const d = new Date(s.created_at);
-        const localDate = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-        return localDate === selected;
-      });
-    }
-
     function renderDailySalesReport() {
-      const rows = getSelectedDateSales();
-      const total = rows.reduce((sum,s) => sum + Number(s.net_amount ?? s.total_amount ?? 0), 0);
-      const totalEl = document.getElementById('day-sales-total');
-      const countEl = document.getElementById('day-sales-count');
-      if (totalEl) totalEl.innerText = '৳' + total.toFixed(2);
-      if (countEl) countEl.innerText = rows.length;
+      const selected = document.getElementById('sales-report-date')?.value;
+      const rows = yearlySalesCache.filter(s => s.created_at && s.created_at.startsWith(selected));
+      const total = rows.reduce((sum, s) => sum + Number(s.net_amount || s.total_amount || 0), 0);
+
+      document.getElementById('day-sales-total').innerText = '৳' + total.toFixed(2);
+      document.getElementById('day-sales-count').innerText = rows.length;
+
       const body = document.getElementById('daily-sales-body');
       if (!body) return;
-      if (!rows.length) {
-        body.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-400">এই তারিখে কোনো বিক্রয় পাওয়া যায়নি।</td></tr>'; 
+      if (rows.length === 0) {
+        body.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-slate-400">No sales on this date.</td></tr>`;
         return;
       }
-      body.innerHTML = rows.map(s => `<tr>
-        <td class="p-2 font-bold">#${s.id ?? '-'}</td>
-        <td class="p-2">${new Date(s.created_at).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</td>
-        <td class="p-2 font-bold text-teal-700">৳${Number(s.net_amount ?? s.total_amount ?? 0).toFixed(2)}</td>
-        <td class="p-2">
-          <button type="button" class="text-red-600 font-bold" onclick="deleteDailySale('${s.id}')">Delete</button>
-        </td>
-      </tr>`).join('');
+
+      body.innerHTML = rows.map(s => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-bold">#${s.id}</td>
+          <td class="p-2.5">${new Date(s.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</td>
+          <td class="p-2.5 font-extrabold text-teal-700">৳${Number(s.net_amount || s.total_amount).toFixed(2)}</td>
+          <td class="p-2.5 text-right"><button onclick="deleteDailySale('${s.id}')" class="text-red-500 font-bold hover:underline">Delete</button></td>
+        </tr>
+      `).join('');
     }
 
     async function deleteDailySale(id) {
-      if (!navigator.onLine) { alert("Offline!"); return; }
       if (!confirm(`Delete Invoice #${id}?`)) return;
       await db.from('sales').delete().eq('id', id);
-      alert('Sale deleted.');
-      await fetchMedicines();
-      await loadYearlySalesData();
+      loadDashboardData();
     }
 
     function downloadDailySalesPDF() {
-      const selectedDate = document.getElementById('sales-report-date')?.value;
-      const rows = getSelectedDateSales();
-      if (!selectedDate || !rows.length) { alert('No sales found for selected date.'); return; }
+      const selected = document.getElementById('sales-report-date')?.value;
+      const rows = yearlySalesCache.filter(s => s.created_at && s.created_at.startsWith(selected));
+      if (!selected || rows.length === 0) {
+        alert("No sales recorded for this date!");
+        return;
+      }
+
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      doc.text('Tasnim Medicine Corner - Daily Sales', 14, 15);
+      doc.text('Tasnim Medicine Corner - Daily Sales Report', 14, 15);
       doc.setFontSize(10);
-      doc.text(`Date: ${selectedDate}`, 14, 22);
+      doc.text(`Date: ${selected}  |  Total Orders: ${rows.length}`, 14, 22);
 
       doc.autoTable({
         startY: 28,
-        head: [['Invoice ID', 'Time', 'Total (BDT)', 'Discount', 'Net (BDT)']],
+        head: [['Invoice ID', 'Time', 'Subtotal', 'Discount', 'Net Amount']],
         body: rows.map(s => [
           String(s.id),
-          new Date(s.created_at).toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'}),
+          new Date(s.created_at).toLocaleTimeString('en-GB'),
           Number(s.total_amount || 0).toFixed(2),
           Number(s.discount || 0).toFixed(2),
           Number(s.net_amount || s.total_amount || 0).toFixed(2)
         ])
       });
-      doc.save(`Sales_Report_${selectedDate}.pdf`);
-    }
 
-    async function loadDashboardData() {
-      const now = new Date();
-      await loadYearlySalesData();
-      const today = now.toISOString().split('T')[0];
-      const dateEl = document.getElementById('dashboard-date');
-      if (dateEl) dateEl.innerText = now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-
-      if (navigator.onLine) {
-        const { data: sales, error: sErr } = await db.from('sales')
-          .select('net_amount, items, total_amount, discount')
-          .gte('created_at', today);
-        if (!sErr && sales) {
-          const totalSales = sales.reduce((a, b) => a + Number(b.net_amount || 0), 0);
-          document.getElementById('dash-sales').innerText = totalSales.toFixed(2);
-        }
-
-        const { data: exp, error: eErr } = await db.from('expenses').select('amount').gte('created_at', today);
-        if (!eErr && exp) {
-          const totalExp = exp.reduce((a, b) => a + Number(b.amount || 0), 0);
-          document.getElementById('dash-expenses').innerText = totalExp.toFixed(2);
-        }
-      }
-
-      const totalItems = medicinesList.length;
-      const lowStock = medicinesList.filter(m => Number(m.stock) <= 5).length;
-      const expiryWatch = medicinesList.filter(m => {
-        if (!m.expiry_date) return false;
-        const days = Math.ceil((new Date(m.expiry_date) - now) / 86400000);
-        return days <= 60;
-      }).length;
-      const stockValue = medicinesList.reduce((sum, m) => sum + (Number(m.buy_price || 0) * Number(m.stock || 0)), 0);
-
-      document.getElementById('dash-medicine-count').innerText = totalItems.toLocaleString();
-      document.getElementById('dash-low-stock').innerText = lowStock.toLocaleString();
-      document.getElementById('dash-expiry-count').innerText = expiryWatch.toLocaleString();
-      document.getElementById('dash-stock-value').innerText = '৳' + stockValue.toLocaleString('en-BD', { maximumFractionDigits: 0 });
+      doc.save(`Sales_${selected}.pdf`);
     }
 
     function checkAlerts() {
-      const alertsBox = document.getElementById('alerts-container');
+      const box = document.getElementById('alerts-container');
       const today = new Date();
-      let alertHtml = '';
+      let html = '';
 
       medicinesList.forEach(m => {
-        if(m.stock <= 5) {
-          alertHtml += `<div class="p-2.5 bg-red-50 text-red-700 rounded-lg border border-red-200">🔻 <b>${m.name}</b>: Low stock! Only ${m.stock} left.</div>`;
+        if (m.stock <= 5) {
+          html += `<div class="p-2.5 bg-red-50 text-red-700 rounded-lg border border-red-200">🔻 <b>${m.name}</b>: Low stock! Only ${m.stock} left.</div>`;
         }
-
-        if(m.expiry_date) {
-          const exp = new Date(m.expiry_date);
-          const diffDays = Math.ceil((exp - today) / (1000 * 60 * 60 * 24));
-          if(diffDays <= 60 && diffDays > 0) {
-            alertHtml += `<div class="p-2.5 bg-amber-50 text-amber-700 rounded-lg border border-amber-200">⏳ <b>${m.name}</b> expires in ${diffDays} days!</div>`;
-          } else if(diffDays <= 0) {
-            alertHtml += `<div class="p-2.5 bg-red-100 text-red-800 rounded-lg border border-red-300">❌ <b>${m.name}</b> has expired!</div>`;
+        if (m.expiry_date) {
+          const days = Math.ceil((new Date(m.expiry_date) - today) / 86400000);
+          if (days <= 60 && days > 0) {
+            html += `<div class="p-2.5 bg-amber-50 text-amber-800 rounded-lg border border-amber-200">⏳ <b>${m.name}</b> expires in ${days} days!</div>`;
+          } else if (days <= 0) {
+            html += `<div class="p-2.5 bg-red-100 text-red-800 rounded-lg border border-red-300">❌ <b>${m.name}</b> has expired!</div>`;
           }
         }
       });
 
-      alertsBox.innerHTML = alertHtml || `<p class="text-slate-400">No urgent alerts found.</p>`;
+      box.innerHTML = html || `<p class="text-slate-400">No urgent alerts found.</p>`;
     }
+
+    // Initialize App
+    window.onload = async () => {
+      lockApp();
+      updateNetworkStatus(navigator.onLine);
+      await fetchMedicines();
+      await loadDashboardData();
+    };
   </script>
-  <!-- ================= MODERN CUSTOM DIALOG MODAL ================= -->
-  <div id="custom-alert-modal" style="display: none;" class="fixed inset-0 bg-slate-900/60 z-[200] items-center justify-center p-4 backdrop-blur-sm transition-all">
-    <div class="bg-white w-full max-w-xs rounded-2xl p-6 shadow-2xl text-center space-y-3.5 border border-slate-100 transform transition-all scale-100 animate-in">
-      <!-- Dynamic Icon -->
-      <div id="alert-modal-icon" class="w-14 h-14 rounded-full flex items-center justify-center mx-auto text-2xl bg-amber-100 text-amber-600 shadow-inner">
-        ⚠️
-      </div>
-      <div>
-        <h3 id="alert-modal-title" class="font-bold text-base text-slate-800">Tasnim Medicine Corner</h3>
-        <p id="alert-modal-message" class="text-xs text-slate-600 mt-1 leading-relaxed"></p>
-      </div>
-      <button type="button" onclick="closeCustomAlert()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold py-3 rounded-xl text-xs shadow-md transition tracking-wide">
-        OK
-      </button>
-    </div>
-  </div>
 </body>
 </html>
