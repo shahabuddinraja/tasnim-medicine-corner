@@ -44,7 +44,6 @@
     .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ================= HEADER STYLES ================= */
     header.app-header {
       height: 72px;
       padding: 0 24px;
@@ -58,13 +57,10 @@
       align-items: center;
     }
 
-    /* ================= DESKTOP PC LAYOUT (>= 992px) ================= */
+    /* DESKTOP PC LAYOUT (>= 992px) */
     @media (min-width: 992px) {
-      body {
-        padding-bottom: 30px !important;
-      }
+      body { padding-bottom: 30px !important; }
 
-      /* ফিক্সড ডকড সাইডবার: লেখার উপরে ভাসবে না */
       body > nav {
         position: fixed !important;
         top: 72px !important;
@@ -116,7 +112,6 @@
         color: var(--navy) !important;
       }
 
-      /* মেইন কনটেইনার সাইডবারের ডানে ফুল-স্ক্রিনে বসবে */
       main {
         margin-left: 220px !important;
         margin-right: 0 !important;
@@ -125,7 +120,6 @@
         padding: 26px 32px 50px !important;
       }
 
-      /* POS ২-কলাম ওয়াইডস্ক্রিন লেআউট */
       #tab-pos.active {
         display: grid !important;
         grid-template-columns: minmax(0, 1.25fr) minmax(380px, 0.85fr) !important;
@@ -133,38 +127,23 @@
         align-items: start !important;
       }
 
-      /* Stock ২-কলাম ওয়াইডস্ক্রিন লেআউট */
       #tab-stock.active {
         display: grid !important;
         grid-template-columns: 460px minmax(0, 1fr) !important;
         gap: 24px !important;
         align-items: start !important;
       }
-      #tab-stock > button {
-        grid-column: 1 / -1 !important;
-      }
-      #add-med-form {
-        grid-column: 1 !important;
-      }
-      #tab-stock > .inventory-panel {
-        grid-column: 2 !important;
-      }
+      #tab-stock > button { grid-column: 1 / -1 !important; }
+      #add-med-form { grid-column: 1 !important; }
+      #tab-stock > .inventory-panel { grid-column: 2 !important; }
 
-      /* Dashboard KPI ৪-কলাম */
-      .premium-kpi-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-      }
+      .premium-kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
     }
 
-    /* ================= MOBILE PHONE LAYOUT (< 992px) ================= */
+    /* MOBILE LAYOUT (< 992px) */
     @media (max-width: 991px) {
-      body {
-        padding-bottom: 95px !important;
-      }
-      header.app-header {
-        height: 66px;
-        padding: 0 16px;
-      }
+      body { padding-bottom: 95px !important; }
+      header.app-header { height: 66px; padding: 0 16px; }
       main {
         width: 100% !important;
         max-width: 600px !important;
@@ -172,7 +151,6 @@
         padding: 16px 12px 24px !important;
       }
 
-      /* মোবাইলে নিচের ফ্লোটিং নেভবার */
       body > nav {
         position: fixed !important;
         bottom: 12px !important;
@@ -207,7 +185,6 @@
       }
     }
 
-    /* ================= COMMON COMPONENT STYLES ================= */
     .tab-content > div, .tab-content > form, .inventory-panel {
       border: 1px solid var(--line) !important;
       border-radius: 18px !important;
@@ -286,7 +263,6 @@
       gap: 12px;
     }
 
-    /* Print Formatting */
     @media print {
       body { background: #fff !important; padding: 0 !important; }
       header.app-header, body > nav, .no-print { display: none !important; }
@@ -357,7 +333,7 @@
         <h1 class="text-base font-bold leading-tight">Tasnim Medicine Corner</h1>
         <div class="flex items-center gap-1.5 mt-0.5">
           <span id="user-role-badge" class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full font-bold">Admin</span>
-          <span id="sync-status" class="text-[10px] bg-emerald-700 px-1.5 py-0.5 rounded-full font-medium">Online</span>
+          <span id="sync-status" class="text-[10px] bg-emerald-700 px-2 py-0.5 rounded-full font-medium transition-all">Online</span>
         </div>
       </div>
     </div>
@@ -397,7 +373,6 @@
 
     <!-- TAB 1: POS / Billing -->
     <section id="tab-pos" class="tab-content active space-y-4">
-      <!-- Search Column -->
       <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
         <label class="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wide">Search Medicine in Shop Stock:</label>
         <input 
@@ -410,7 +385,6 @@
         <div id="pos-search-results" class="divide-y max-h-72 overflow-y-auto mt-2 hidden border rounded-xl bg-white shadow-xl"></div>
       </div>
 
-      <!-- Current Cart Memo Column -->
       <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
         <div>
           <h2 class="font-bold text-base text-slate-800 mb-3 border-b pb-2 flex justify-between items-center">
@@ -450,7 +424,6 @@
         <span class="text-xs text-slate-400">Click to open form</span>
       </button>
 
-      <!-- Add/Edit Medicine Form -->
       <form id="add-med-form" onsubmit="saveMedicine(event)" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hidden space-y-4">
         <input type="hidden" id="m-edit-id" value="">
 
@@ -497,7 +470,6 @@
           </div>
         </div>
 
-        <!-- Purchase Box -->
         <div class="purchase-entry-box">
           <div class="purchase-entry-heading">
             <div>
@@ -594,7 +566,6 @@
         </div>
       </form>
 
-      <!-- Shop Inventory List Panel -->
       <div class="inventory-panel p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
         <div class="flex justify-between items-center mb-3">
           <div>
@@ -677,7 +648,6 @@
         </div>
       </div>
 
-      <!-- KPI Grid -->
       <div class="premium-kpi-grid grid gap-3">
         <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
           <span class="text-xs text-slate-500 font-bold block">Total Medicines</span>
@@ -889,10 +859,44 @@
     let activeStockFilter = "all";
     let yearlySalesCache = [];
 
+    // ================== AUTO-RECONNECT & NETWORK LISTENER ==================
+    window.addEventListener('online', async () => {
+      updateNetworkStatus(true);
+      console.log("Internet Restored! Auto-reloading data...");
+      await reloadAllData();
+    });
+
+    window.addEventListener('offline', () => {
+      updateNetworkStatus(false);
+      console.warn("Internet Disconnected! Preserving offline data.");
+    });
+
+    function updateNetworkStatus(isOnline) {
+      const badge = document.getElementById('sync-status');
+      if (!badge) return;
+      if (isOnline) {
+        badge.innerText = 'Online';
+        badge.className = 'text-[10px] bg-emerald-700 px-2 py-0.5 rounded-full font-medium transition-all';
+      } else {
+        badge.innerText = 'Offline (No Net)';
+        badge.className = 'text-[10px] bg-red-600 px-2 py-0.5 rounded-full font-bold transition-all';
+      }
+    }
+
+    async function reloadAllData() {
+      if (!navigator.onLine) return;
+      await fetchMedicines();
+      await loadDashboardData();
+      if (document.getElementById('tab-purchases')?.classList.contains('active')) {
+        await loadPurchaseRegister();
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       if (document.getElementById('m-pack-size')) calculatePurchaseCost();
       const pd = document.getElementById('m-purchase-date');
       if (pd) pd.value = new Date().toISOString().split('T')[0];
+      updateNetworkStatus(navigator.onLine);
     });
 
     // ================== SECURITY PIN SYSTEM ==================
@@ -1033,6 +1037,7 @@
 
     window.onload = async () => {
       lockApp();
+      updateNetworkStatus(navigator.onLine);
       await fetchMedicines();
       await loadDashboardData();
     };
@@ -1044,6 +1049,12 @@
 
       if (!query.trim() || query.length < 2) {
         dropdown.classList.add('hidden');
+        return;
+      }
+
+      if (!navigator.onLine) {
+        dropdown.classList.remove('hidden');
+        dropdown.innerHTML = `<div class="p-3 text-red-500 text-center text-xs">Offline! You can continue typing to save manually.</div>`;
         return;
       }
 
@@ -1181,8 +1192,8 @@
           navBtn.classList.add('text-slate-400');
         }
       });
-      if(tabId === 'reports') loadDashboardData();
-      if(tabId === 'purchases') loadPurchaseRegister();
+      if(tabId === 'reports' && navigator.onLine) loadDashboardData();
+      if(tabId === 'purchases' && navigator.onLine) loadPurchaseRegister();
     }
 
     function openAddMedicineForm() {
@@ -1217,13 +1228,15 @@
       try {
         const { data, error } = await db.from('medicines').select('*').order('name', { ascending: true });
         if(!error && data) {
-          medicinesList = data;
+          medicinesList = data; // Keep in memory
           renderStockList('');
           checkAlerts();
           if (typeof loadDashboardData === 'function') loadDashboardData();
         }
       } catch (err) {
-        console.error("Supabase Error:", err);
+        console.error("Supabase Error (preserved cached list):", err);
+        // Do not wipe medicinesList on error!
+        renderStockList('');
       }
     }
 
@@ -1290,6 +1303,10 @@
     }
 
     async function deleteMedicine(id) {
+      if (!navigator.onLine) {
+        alert("Cannot delete while offline! Please connect to internet.");
+        return;
+      }
       const med = medicinesList.find(m => m.id === id);
       const name = med ? med.name : 'this item';
 
@@ -1308,6 +1325,11 @@
 
     async function saveMedicine(e) {
       e.preventDefault();
+      if (!navigator.onLine) {
+        alert("Cannot save stock while offline! Please connect to internet.");
+        return;
+      }
+
       const editId = document.getElementById('m-edit-id').value;
       const purchase = calculatePurchaseCost();
       const supplierName = document.getElementById('m-supplier').value.trim();
@@ -1341,7 +1363,6 @@
 
       const lineTotal = Math.max(0, purchase.totalIP + purchase.totalVAT - purchase.discount);
 
-      // Save to purchase register
       if (supplierName && invoiceNo) {
         const { data: existingInvoices } = await db.from('purchases')
           .select('id,total_amount,paid_amount')
@@ -1570,6 +1591,10 @@
 
     async function processSale() {
       if(cart.length === 0) { alert("Cart is empty!"); return; }
+      if(!navigator.onLine) {
+        alert("Offline! Cannot process sale without internet. Please connect internet.");
+        return;
+      }
 
       const subtotal = cart.reduce((acc, item) => acc + (item.sell_price * item.qty), 0);
       const discount = parseFloat(document.getElementById('cart-discount').value) || 0;
@@ -1632,6 +1657,10 @@
 
     // ================== EXPENSES & DASHBOARD ==================
     async function addExpense() {
+      if (!navigator.onLine) {
+        alert("Cannot add expense while offline! Connect to internet.");
+        return;
+      }
       if (currentUserRole !== 'admin') {
         alert("Only Admin can add expenses!");
         return;
@@ -1664,10 +1693,16 @@
     async function loadPurchaseRegister() {
       const body = document.getElementById('purchase-register-body');
       if (!body) return;
-      body.innerHTML = '<tr><td colspan="7" class="text-center py-6 text-slate-400">Loading purchase invoices...</td></tr>';
+      if (!navigator.onLine && purchaseRegisterCache.length > 0) {
+        renderPurchaseRegister();
+        return;
+      }
+
       const { data, error } = await db.from('purchases').select('*').order('purchase_date', { ascending: false }).limit(300);
       if (error) {
-        body.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-red-500">Error loading purchases: ${error.message}</td></tr>`;
+        if (purchaseRegisterCache.length === 0) {
+          body.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-red-500">Error: ${error.message}</td></tr>`;
+        }
         return;
       }
       purchaseRegisterCache = data || [];
@@ -1707,6 +1742,7 @@
     }
 
     async function editPurchasePayment(id) {
+      if (!navigator.onLine) { alert("Offline!"); return; }
       const invoice = purchaseRegisterCache.find(x => String(x.id) === String(id));
       if (!invoice) return;
       const current = Number(invoice.paid_amount || 0);
@@ -1722,6 +1758,7 @@
     }
 
     async function deletePurchaseInvoice(id) {
+      if (!navigator.onLine) { alert("Offline!"); return; }
       const invoice = purchaseRegisterCache.find(x => String(x.id) === String(id));
       if (!invoice) return;
       if (!confirm(`Delete purchase invoice ${invoice.invoice_no || ''}?`)) return;
@@ -1731,11 +1768,17 @@
     }
 
     async function loadYearlySalesData() {
-      const { data } = await db.from('sales')
+      if (!navigator.onLine && yearlySalesCache.length > 0) {
+        renderDailySalesReport();
+        return;
+      }
+      const { data, error } = await db.from('sales')
         .select('id, created_at, net_amount, total_amount, discount, items')
         .order('created_at', { ascending: false })
         .limit(10000);
-      yearlySalesCache = data || [];
+      if (!error && data) {
+        yearlySalesCache = data;
+      }
       const dateInput = document.getElementById('sales-report-date');
       if (dateInput && !dateInput.value) {
         const now = new Date();
@@ -1779,6 +1822,7 @@
     }
 
     async function deleteDailySale(id) {
+      if (!navigator.onLine) { alert("Offline!"); return; }
       if (!confirm(`Delete Invoice #${id}?`)) return;
       await db.from('sales').delete().eq('id', id);
       alert('Sale deleted.');
@@ -1817,15 +1861,21 @@
       const dateEl = document.getElementById('dashboard-date');
       if (dateEl) dateEl.innerText = now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
-      const { data: sales } = await db.from('sales')
-        .select('net_amount, items, total_amount, discount')
-        .gte('created_at', today);
-      const totalSales = sales ? sales.reduce((a, b) => a + Number(b.net_amount || 0), 0) : 0;
-      document.getElementById('dash-sales').innerText = totalSales.toFixed(2);
+      if (navigator.onLine) {
+        const { data: sales, error: sErr } = await db.from('sales')
+          .select('net_amount, items, total_amount, discount')
+          .gte('created_at', today);
+        if (!sErr && sales) {
+          const totalSales = sales.reduce((a, b) => a + Number(b.net_amount || 0), 0);
+          document.getElementById('dash-sales').innerText = totalSales.toFixed(2);
+        }
 
-      const { data: exp } = await db.from('expenses').select('amount').gte('created_at', today);
-      const totalExp = exp ? exp.reduce((a, b) => a + Number(b.amount || 0), 0) : 0;
-      document.getElementById('dash-expenses').innerText = totalExp.toFixed(2);
+        const { data: exp, error: eErr } = await db.from('expenses').select('amount').gte('created_at', today);
+        if (!eErr && exp) {
+          const totalExp = exp.reduce((a, b) => a + Number(b.amount || 0), 0);
+          document.getElementById('dash-expenses').innerText = totalExp.toFixed(2);
+        }
+      }
 
       const totalItems = medicinesList.length;
       const lowStock = medicinesList.filter(m => Number(m.stock) <= 5).length;
