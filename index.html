@@ -284,6 +284,30 @@
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans">
 
+  <!-- ================= DATALIST FOR PHARMA COMPANIES ================= -->
+  <datalist id="company-suggestions">
+    <option value="Square Pharmaceuticals Ltd.">Square Pharmaceuticals</option>
+    <option value="Beximco Pharmaceuticals Ltd.">Beximco Pharmaceuticals</option>
+    <option value="Incepta Pharmaceuticals Ltd.">Incepta Pharmaceuticals</option>
+    <option value="Renata Limited">Renata Limited</option>
+    <option value="Healthcare Pharmaceuticals Ltd.">Healthcare Pharmaceuticals</option>
+    <option value="The ACME Laboratories Ltd.">ACME Laboratories</option>
+    <option value="Opsonin Pharma Ltd.">Opsonin Pharma</option>
+    <option value="Eskayef Pharmaceuticals Ltd. (SK+F)">Eskayef (SK+F)</option>
+    <option value="Aristopharma Ltd.">Aristopharma Ltd.</option>
+    <option value="Beacon Pharmaceuticals Ltd.">Beacon Pharmaceuticals</option>
+    <option value="Popular Pharmaceuticals Ltd.">Popular Pharmaceuticals</option>
+    <option value="Drug International Ltd.">Drug International</option>
+    <option value="ACI Limited">ACI Pharmaceuticals</option>
+    <option value="Ibn Sina Pharmaceutical Industry">Ibn Sina Pharmaceuticals</option>
+    <option value="Radiant Pharmaceuticals Ltd.">Radiant Pharmaceuticals</option>
+    <option value="Orion Pharma Ltd.">Orion Pharma</option>
+    <option value="Ziska Pharmaceuticals Ltd.">Ziska Pharmaceuticals</option>
+    <option value="Nipro JMI Pharma">Nipro JMI Pharma</option>
+    <option value="Delta Pharma Ltd.">Delta Pharma</option>
+    <option value="General Pharmaceuticals Ltd.">General Pharmaceuticals</option>
+  </datalist>
+
   <!-- ================= SECURITY LOCK SCREEN OVERLAY ================= -->
   <div id="app-lock-screen" style="display: flex;" class="fixed inset-0 bg-slate-900/95 z-[100] items-center justify-center p-4 backdrop-blur-md">
     <div class="bg-white w-full max-w-xs rounded-2xl p-6 shadow-2xl text-center space-y-4 border border-slate-200">
@@ -491,7 +515,7 @@
           <div class="grid grid-cols-2 gap-2.5">
             <div class="col-span-2">
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Supplier / Company Name *</label>
-              <input type="text" id="m-supplier" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2 border rounded-lg text-xs"/>
+              <input type="text" id="m-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2 border rounded-lg text-xs"/>
             </div>
             <div>
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Invoice Number *</label>
@@ -790,7 +814,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 text-xs">
           <div class="sm:col-span-2">
             <label class="font-bold text-slate-600 block mb-1">Company / Supplier Name *</label>
-            <input type="text" id="multi-supplier" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+            <input type="text" id="multi-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
           </div>
           <div>
             <label class="font-bold text-slate-600 block mb-1">Invoice / Challan No. *</label>
@@ -2606,3 +2630,4 @@
   </script>
 </body>
 </html>
+
