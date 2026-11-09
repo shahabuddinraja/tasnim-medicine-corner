@@ -341,7 +341,7 @@
               <span class="font-bold text-slate-800">৳ <span id="m-calc-subtotal">0.000</span></span>
             </div>
 
-            <!-- Discount Row: 100% Contained Inside Card -->
+            <!-- Discount Row: 100% Contained -->
             <div class="flex justify-between items-center gap-1.5 py-1">
               <span class="text-slate-600 font-semibold text-xs shrink-0">Discount:</span>
               <div class="flex items-center gap-1.5 shrink-0">
@@ -457,25 +457,27 @@
         <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl text-teal-300">✦</div>
       </div>
 
+      <!-- KPI Grid (Stock Value Overflow Fix Applied) -->
       <div class="premium-kpi-grid grid gap-3">
-        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-bold block">Total Medicines</span>
-          <strong id="dash-medicine-count" class="text-2xl font-bold text-slate-800 mt-1 block">0</strong>
+        <div class="p-3 sm:p-4 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <span class="text-xs text-slate-500 font-bold block truncate">Total Medicines</span>
+          <strong id="dash-medicine-count" class="text-2xl font-bold text-slate-800 mt-1 block truncate">0</strong>
           <small class="text-[10px] text-slate-400">In inventory</small>
         </div>
-        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-bold block">Low Stock</span>
-          <strong id="dash-low-stock" class="text-2xl font-bold text-amber-600 mt-1 block">0</strong>
+        <div class="p-3 sm:p-4 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <span class="text-xs text-slate-500 font-bold block truncate">Low Stock</span>
+          <strong id="dash-low-stock" class="text-2xl font-bold text-amber-600 mt-1 block truncate">0</strong>
           <small class="text-[10px] text-slate-400">Need reorder</small>
         </div>
-        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-bold block">Expiry Alert</span>
-          <strong id="dash-expiry-count" class="text-2xl font-bold text-red-600 mt-1 block">0</strong>
+        <div class="p-3 sm:p-4 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <span class="text-xs text-slate-500 font-bold block truncate">Expiry Alert</span>
+          <strong id="dash-expiry-count" class="text-2xl font-bold text-red-600 mt-1 block truncate">0</strong>
           <small class="text-[10px] text-slate-400">Under 60 days</small>
         </div>
-        <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs text-slate-500 font-bold block">Stock Value</span>
-          <strong id="dash-stock-value" class="text-2xl font-bold text-teal-700 mt-1 block">৳0</strong>
+        <div class="p-3 sm:p-4 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <span class="text-xs text-slate-500 font-bold block truncate">Stock Value</span>
+          <!-- Responsive font size ensuring it never overflows the card -->
+          <strong id="dash-stock-value" class="text-base sm:text-xl font-black text-teal-700 mt-1 block truncate" title="At cost price">৳0</strong>
           <small class="text-[10px] text-slate-400">At cost price</small>
         </div>
       </div>
@@ -604,7 +606,7 @@
                   <span class="absolute right-1 top-1/2 -translate-y-1/2 text-amber-700 font-bold text-xs pointer-events-none">%</span>
                 </div>
                 <div class="relative" style="width: 74px;">
-                  <span class="absolute left-1 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs pointer-events-none">৳</span>
+                  <span class="absolute left-1.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs pointer-events-none">৳</span>
                   <input type="number" id="multi-discount-flat" oninput="calculateMultiLineCost('flat')" value="0.000" class="h-8 text-right text-xs font-bold rounded-lg outline-none" style="border: 1px solid #cbd5e1 !important; background: #ffffff !important; border-radius: 8px !important; padding: 2px 4px 2px 14px !important; width: 100% !important; box-sizing: border-box !important;"/>
                 </div>
               </div>
@@ -1425,7 +1427,6 @@
       });
     }
 
-    // 👉 EDIT ও DELETE বাটন দুটোই নিশ্চিত করা হয়েছে
     function renderDailySalesReport() {
       const rows = getSelectedDateSales();
       const total = rows.reduce((sum,s) => sum + Number(s.net_amount ?? s.total_amount ?? 0), 0);
@@ -1445,7 +1446,6 @@
       </tr>`).join('');
     }
 
-    // 👉 সম্পূর্ণ EDIT DAILY SALE ফাংশন
     async function editDailySale(id) {
       const sale = yearlySalesCache.find(x => String(x.id) === String(id));
       if (!sale) { alert('বিক্রয়ের তথ্য পাওয়া যায়নি।'); return; }
@@ -1493,7 +1493,6 @@
       await loadYearlySalesData();
     }
 
-    // 👉 সম্পূর্ণ DELETE DAILY SALE ফাংশন
     async function deleteDailySale(id) {
       const sale = yearlySalesCache.find(x => String(x.id) === String(id));
       if (!sale) { alert('বিক্রয়ের তথ্য পাওয়া যায়নি।'); return; }
@@ -1534,6 +1533,7 @@
       doc.save(`Sales_${selectedDate}.pdf`);
     }
 
+    // 👉 STOCK VALUE OVERFLOW FIX: দশমিক বাদ দিয়ে রাউন্ড ফিগার ও রেসপনসিভ রাখা হয়েছে
     async function loadDashboardData() {
       const now = new Date();
       await loadYearlySalesData();
@@ -1552,7 +1552,10 @@
       document.getElementById('dash-medicine-count').innerText = medicinesList.length;
       document.getElementById('dash-low-stock').innerText = medicinesList.filter(m => Number(m.stock) <= 5).length;
       document.getElementById('dash-expiry-count').innerText = medicinesList.filter(m => m.expiry_date && Math.ceil((new Date(m.expiry_date) - now)/86400000) <= 60).length;
-      document.getElementById('dash-stock-value').innerText = '৳' + medicinesList.reduce((sum, m) => sum + (Number(m.buy_price || 0) * Number(m.stock || 0)), 0).toLocaleString();
+
+      // দশমিকের সংখ্যা (.246) বাদ দিয়ে পূর্ণ সংখ্যায় দেখানো (যেমন: ৳ 10,526)
+      const stockVal = medicinesList.reduce((sum, m) => sum + (Number(m.buy_price || 0) * Number(m.stock || 0)), 0);
+      document.getElementById('dash-stock-value').innerText = '৳' + Math.round(stockVal).toLocaleString('en-BD');
     }
 
     function checkAlerts() {
