@@ -223,20 +223,6 @@
       border-bottom: 1px solid #e5eeee;
       padding-bottom: 8px;
     }
-    .purchase-calculation-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .purchase-calculation-grid > div {
-      padding: 9px 11px;
-      border-radius: 10px;
-      background: #edf3f5;
-    }
-    .calculated-buy {
-      background: #e3f5ef !important;
-      border: 1px solid #ccebe0;
-    }
 
     .purchase-table {
       width: 100%;
@@ -458,27 +444,28 @@
         </button>
       </div>
 
+      <!-- SINGLE MEDICINE ENTRY FORM (Perfected Layout) -->
       <form id="add-med-form" onsubmit="saveMedicine(event)" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hidden space-y-4">
         <input type="hidden" id="m-edit-id" value="">
 
         <div class="border-b pb-2 flex justify-between items-center">
           <div>
-            <h3 id="form-title" class="font-bold text-base text-slate-800">New Stock Entry</h3>
-            <p class="text-[11px] text-slate-400">Search cloud database or type manually</p>
+            <h3 id="form-title" class="font-bold text-base text-slate-800">Add Items to Purchase</h3>
+            <p class="text-[11px] text-slate-400">নতুন ওষুধ এন্ট্রি অথবা চালানের আইটেম যোগ করুন</p>
           </div>
-          <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">Cloud Connected</span>
+          <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">Smart Stock</span>
         </div>
 
         <div class="relative">
-          <label class="text-xs text-slate-600 font-bold block mb-1">Brand Name * (Type to search)</label>
+          <label class="text-xs text-slate-600 font-bold block mb-1">Item Name * (Type to search)</label>
           <input 
             type="text" 
             id="m-name" 
             oninput="searchMasterMedicines(this.value)" 
             autocomplete="off"
             required 
-            class="w-full p-2.5 border rounded-xl text-sm focus:outline-emerald-500" 
-            placeholder="Type name (e.g. Napa, Ace, Seclo)..."
+            class="w-full h-10 p-2.5 border rounded-xl text-sm focus:outline-emerald-500 font-semibold" 
+            placeholder="e.g. Ebatrol 10 mg Tab, Napa, Seclo..."
           />
           <div id="master-search-dropdown" class="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-300 rounded-xl shadow-2xl max-h-64 overflow-y-auto hidden z-50 divide-y text-xs"></div>
         </div>
@@ -488,7 +475,7 @@
           <input 
             type="text" 
             id="m-generic" 
-            class="w-full p-2.5 border rounded-xl text-sm focus:outline-emerald-500 bg-slate-50" 
+            class="w-full h-10 p-2.5 border rounded-xl text-sm focus:outline-emerald-500 bg-slate-50" 
             placeholder="Auto-fills from cloud or type manually"
           />
         </div>
@@ -496,14 +483,15 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="text-xs text-slate-600 font-bold block mb-1">Batch No.</label>
-            <input type="text" id="m-batch" class="w-full p-2.5 border rounded-xl text-sm" placeholder="B102"/>
+            <input type="text" id="m-batch" class="w-full h-10 p-2.5 border rounded-xl text-sm" placeholder="B102"/>
           </div>
           <div>
             <label class="text-xs text-slate-600 font-bold block mb-1">Expiry Date *</label>
-            <input type="date" id="m-expiry" required class="w-full p-2.5 border rounded-xl text-sm"/>
+            <input type="date" id="m-expiry" required class="w-full h-10 p-2.5 border rounded-xl text-sm"/>
           </div>
         </div>
 
+        <!-- Supplier & Invoice Info -->
         <div class="purchase-entry-box purchase-header-box">
           <div class="purchase-entry-heading">
             <div>
@@ -515,84 +503,114 @@
           <div class="grid grid-cols-2 gap-2.5">
             <div class="col-span-2">
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Supplier / Company Name *</label>
-              <input type="text" id="m-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2 border rounded-lg text-xs"/>
+              <input type="text" id="m-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full h-9 p-2 border rounded-lg text-xs"/>
             </div>
             <div>
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Invoice Number *</label>
-              <input type="text" id="m-invoice-no" required placeholder="INV-001" class="w-full p-2 border rounded-lg text-xs"/>
+              <input type="text" id="m-invoice-no" required placeholder="INV-001" class="w-full h-9 p-2 border rounded-lg text-xs"/>
             </div>
             <div>
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Purchase Date *</label>
-              <input type="date" id="m-purchase-date" required class="w-full p-2 border rounded-lg text-xs"/>
+              <input type="date" id="m-purchase-date" required class="w-full h-9 p-2 border rounded-lg text-xs"/>
             </div>
             <div>
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Paid Amount (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-paid-amount" value="0" class="w-full p-2 border rounded-lg text-xs"/>
+              <input type="number" min="0" step="0.01" id="m-paid-amount" value="0" class="w-full h-9 p-2 border rounded-lg text-xs"/>
             </div>
             <div>
               <label class="text-[11px] font-bold text-slate-600 block mb-1">Payment Method</label>
-              <select id="m-payment-method" class="w-full p-2 border rounded-lg text-xs">
+              <select id="m-payment-method" class="w-full h-9 p-2 border rounded-lg text-xs">
                 <option value="Cash">Cash</option><option value="Bank">Bank</option><option value="Mobile Banking">Mobile Banking</option><option value="Credit">Credit</option>
               </select>
             </div>
           </div>
         </div>
 
-        <div class="purchase-entry-box">
-          <div class="purchase-entry-heading">
-            <b class="text-xs text-slate-800">Pack & Unit Calculation</b>
-            <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold">CALCULATOR</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Pack Qty</label>
-              <input type="number" min="0" step="1" id="m-purchase-qty" value="1" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
+        <!-- 100% PERFECT ALIGNED CALCULATOR CARD -->
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+          
+          <!-- Row 1: Quantity, Free Qty, Unit (Perfect Horizontal Alignment) -->
+          <div class="grid grid-cols-3 gap-2.5 items-end">
+            <div class="flex flex-col justify-end">
+              <label class="block text-xs font-bold text-slate-600 mb-1 truncate">Quantity *</label>
+              <input type="number" id="m-qty" value="10" oninput="calculateSinglePurchase()" class="w-full h-10 p-2 text-center border rounded-xl text-sm font-bold bg-white"/>
             </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Pack Size</label>
-              <input type="text" id="m-pack-size" value="1x1's" oninput="calculatePurchaseCost()" placeholder="e.g. 10x10's" class="w-full p-2 border rounded-lg text-xs"/>
+            <div class="flex flex-col justify-end">
+              <label class="block text-xs font-bold text-blue-600 mb-1 truncate">Free Qty</label>
+              <input type="number" id="m-free-qty" value="0" oninput="calculateSinglePurchase()" placeholder="0" class="w-full h-10 p-2 text-center border-2 border-blue-400 rounded-xl text-sm font-bold bg-blue-50/50"/>
             </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Units per Pack</label>
-              <input type="number" min="1" step="1" id="m-pack-units" value="1" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Unit I.P (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-unit-ip" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Unit VAT (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-unit-vat" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-600 block mb-1">Line Discount (৳)</label>
-              <input type="number" min="0" step="0.01" id="m-line-discount" value="0" oninput="calculatePurchaseCost()" class="w-full p-2 border rounded-lg text-xs"/>
+            <div class="flex flex-col justify-end">
+              <label class="block text-xs font-bold text-slate-600 mb-1 truncate">Unit</label>
+              <select id="m-unit" class="w-full h-10 px-2 border rounded-xl text-xs font-bold bg-white">
+                <option value="Pcs">Pcs</option>
+                <option value="Box">Box</option>
+                <option value="Strip">Strip</option>
+              </select>
             </div>
           </div>
-          <div class="purchase-calculation-grid text-xs">
-            <div><small class="text-slate-500 block">Total Units</small><b id="m-total-units">0</b></div>
-            <div class="calculated-buy"><small class="text-teal-700 font-bold block">Buy Price / Unit</small><b id="m-calculated-buy" class="text-teal-800">৳0.00</b></div>
-          </div>
-        </div>
 
-        <div class="grid grid-cols-3 gap-2.5">
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Buy Price (৳)</label>
-            <input type="number" step="0.0001" id="m-buy" required class="w-full p-2.5 border rounded-xl text-sm bg-slate-50 font-bold"/>
+          <!-- Row 2: Rate & Sell Price (Aligned) -->
+          <div class="grid grid-cols-2 gap-2.5 items-end">
+            <div class="flex flex-col justify-end">
+              <label class="block text-xs font-bold text-slate-600 mb-1 truncate">Rate (Price/Unit) *</label>
+              <input type="number" step="0.001" id="m-rate" value="5.000" oninput="calculateSinglePurchase()" class="w-full h-10 p-2.5 border rounded-xl text-sm font-bold bg-white"/>
+            </div>
+            <div class="flex flex-col justify-end">
+              <label class="block text-xs font-bold text-emerald-600 mb-1 truncate">Sell Price / Unit (৳) *</label>
+              <input type="number" step="0.01" id="m-sell" required placeholder="6.00" class="w-full h-10 p-2.5 border rounded-xl text-sm font-bold text-emerald-600 bg-white"/>
+            </div>
           </div>
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Sell Price (৳)</label>
-            <input type="number" step="0.01" id="m-sell" required class="w-full p-2.5 border rounded-xl text-sm font-bold text-emerald-600"/>
+
+          <!-- Row 3: Totals & Taxes Box (Clean, No-Overflow Design) -->
+          <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-2 text-xs">
+            <b class="text-slate-700 block text-xs border-b pb-1 font-bold">Totals & Taxes</b>
+            
+            <div class="flex justify-between items-center text-slate-600 py-0.5">
+              <span>Subtotal (Rate x Qty):</span>
+              <span class="font-bold text-slate-800">৳ <span id="m-calc-subtotal">50.000</span></span>
+            </div>
+
+            <!-- Discount Row: Clean, Compact, Fits mobile screen perfectly -->
+            <div class="flex justify-between items-center gap-2 py-0.5">
+              <span class="text-slate-600 font-semibold shrink-0">Discount:</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <div class="flex items-center border border-amber-300 rounded-lg bg-amber-50 px-1.5 py-1">
+                  <input type="number" id="m-discount-pct" oninput="calculateSinglePurchase('pct')" placeholder="0" class="w-10 text-right text-xs bg-transparent font-bold outline-none"/>
+                  <span class="text-amber-700 font-bold ml-1 text-xs">%</span>
+                </div>
+                <div class="flex items-center border border-slate-300 rounded-lg bg-white px-1.5 py-1">
+                  <span class="text-slate-400 mr-1 text-xs">৳</span>
+                  <input type="number" id="m-discount-flat" oninput="calculateSinglePurchase('flat')" value="0.000" class="w-14 text-right text-xs font-bold outline-none"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center font-bold text-sm text-slate-900 border-t pt-1.5">
+              <span>Total Amount:</span>
+              <span class="text-base text-slate-900 font-black">৳ <span id="m-calc-total">50.000</span></span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-dashed">
+              <div class="bg-emerald-50 p-2 rounded-lg text-emerald-800">
+                <small class="block text-[10px]">স্টকে মোট যোগ হবে:</small>
+                <b id="m-calc-units" class="text-sm">10</b> <span class="text-[10px]">Units</span>
+              </div>
+              <div class="bg-teal-50 p-2 rounded-lg text-teal-800">
+                <small class="block text-[10px]">প্রকৃত কেনা রেট/Unit:</small>
+                <b id="m-calc-buy" class="text-sm">৳5.000</b>
+              </div>
+            </div>
           </div>
-          <div>
-            <label class="text-xs text-slate-600 font-bold block mb-1">Stock Qty</label>
-            <input type="number" id="m-stock" required class="w-full p-2.5 border rounded-xl text-sm bg-slate-50 font-bold"/>
-          </div>
+
+          <!-- Hidden storage fields -->
+          <input type="hidden" id="m-buy" value="5.000"/>
+          <input type="hidden" id="m-stock" value="10"/>
+
         </div>
 
         <div class="flex gap-2 pt-2">
           <button type="submit" id="form-submit-btn" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm shadow">
-            Save to Stock
+            Save to Stock (স্বয়ংক্রিয় স্টক যোগ হবে)
           </button>
           <button type="button" onclick="cancelEdit()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-3 rounded-xl font-bold text-sm">
             Cancel
@@ -627,14 +645,14 @@
         <div>
           <span class="text-xs text-teal-400 font-bold uppercase tracking-wider">PROCUREMENT</span>
           <h2 class="text-xl font-bold mt-0.5">Supplier Purchase Register</h2>
-          <p class="text-xs text-slate-300">এক চালানে একাধিক ওষুধ এক সাথে এন্ট্রি ও চালান বাকি খতিয়ান</p>
+          <p class="text-xs text-slate-300">এক চালানে একাধিক ওষুধ এক সাথে এন্ট্রি ও চালান বাকি খতিয়ান</p>
         </div>
         <button type="button" onclick="openMultiInvoiceModal()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-3 rounded-xl text-xs font-bold shadow flex items-center justify-center gap-1.5">
           <span>🧾</span> <span>＋ New Purchase (এক চালানে সব ওষুধ)</span>
         </button>
       </div>
 
-      <!-- Financial Metrics Cards (Image 2 Overflow Fixed) -->
+      <!-- Financial Metrics Cards -->
       <div class="grid grid-cols-3 gap-2 sm:gap-3">
         <div class="p-2 sm:p-4 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <small class="text-[10px] sm:text-xs text-slate-500 font-bold block truncate">Total Purchase</small>
@@ -789,7 +807,7 @@
 
   </main>
 
-  <!-- ================= MULTI-MEDICINE INVOICE INTAKE MODAL ================= -->
+  <!-- ================= MULTI-MEDICINE INVOICE INTAKE MODAL (Perfected Layout) ================= -->
   <div id="multi-invoice-modal" class="fixed inset-0 bg-slate-900/80 z-[150] hidden flex items-center justify-center p-3 backdrop-blur-sm">
     <div class="bg-white w-full max-w-4xl rounded-2xl p-4 sm:p-6 shadow-2xl border border-slate-200 max-h-[94vh] overflow-y-auto space-y-4">
       
@@ -802,7 +820,7 @@
         <button type="button" onclick="closeMultiInvoiceModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-lg">&times;</button>
       </div>
 
-      <!-- 1. Invoice General Info (একবার লিখবেন) -->
+      <!-- 1. Invoice General Info -->
       <div class="purchase-entry-box purchase-header-box">
         <div class="purchase-entry-heading">
           <div>
@@ -814,25 +832,25 @@
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 text-xs">
           <div class="sm:col-span-2">
             <label class="font-bold text-slate-600 block mb-1">Company / Supplier Name *</label>
-            <input type="text" id="multi-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+            <input type="text" id="multi-supplier" list="company-suggestions" required placeholder="e.g. Square Pharmaceuticals Ltd." class="w-full h-10 p-2.5 border rounded-xl bg-white font-semibold"/>
           </div>
           <div>
             <label class="font-bold text-slate-600 block mb-1">Invoice / Challan No. *</label>
-            <input type="text" id="multi-invoice-no" required placeholder="SQ-9842" class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+            <input type="text" id="multi-invoice-no" required placeholder="SQ-9842" class="w-full h-10 p-2.5 border rounded-xl bg-white font-semibold"/>
           </div>
           <div>
             <label class="font-bold text-slate-600 block mb-1">Purchase Date *</label>
-            <input type="date" id="multi-purchase-date" required class="w-full p-2.5 border rounded-xl bg-white font-semibold"/>
+            <input type="date" id="multi-purchase-date" required class="w-full h-10 p-2.5 border rounded-xl bg-white font-semibold"/>
           </div>
         </div>
       </div>
 
-      <!-- 2. Medicine Line Item Input with Pack & Unit Calculator -->
+      <!-- 2. Medicine Line Item Input with Photo Sample Calculator -->
       <div class="purchase-entry-box">
         <div class="purchase-entry-heading">
           <div>
-            <b class="text-xs text-slate-800">২. ওষুধ যোগ করুন (Add Medicines into this Invoice)</b>
-            <small class="text-[10px] text-slate-400 block">ওষুধ সার্চ করুন এবং ক্যালকুলেটরে সঠিক রেট হিসাব করে যোগ করুন</small>
+            <b class="text-xs text-slate-800">২. ওষুধ যোগ করুন (Add Items to Purchase)</b>
+            <small class="text-[10px] text-slate-400 block">ওষুধ সার্চ করুন এবং ক্যালকুলেটরে সঠিক রেট হিসাব করে চালানে যোগ করুন</small>
           </div>
           <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold uppercase">CALCULATOR</span>
         </div>
@@ -840,82 +858,107 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
           <div class="relative sm:col-span-2">
             <div class="flex justify-between items-center mb-1">
-              <label class="font-bold text-slate-700">Brand Name * (Type to search)</label>
+              <label class="font-bold text-slate-700">Item Name * (Type to search)</label>
               <button type="button" id="btn-close-multi-dropdown" onclick="closeMultiDropdown()" class="text-[11px] text-red-500 font-bold hidden hover:underline">✕ Close Search</button>
             </div>
-            <input type="text" id="multi-line-name" oninput="searchMasterMedicinesMulti(this.value)" autocomplete="off" placeholder="Type medicine name (e.g. Napa, Seclo)..." class="w-full p-2.5 border rounded-xl bg-white"/>
+            <input type="text" id="multi-line-name" oninput="searchMasterMedicinesMulti(this.value)" autocomplete="off" placeholder="e.g. Ebatrol 10 mg Tab, Napa, Seclo..." class="w-full h-10 p-2.5 border rounded-xl bg-white font-semibold"/>
             <div id="multi-line-search-dropdown" class="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-300 rounded-xl shadow-2xl max-h-56 overflow-y-auto hidden z-50 divide-y text-xs"></div>
           </div>
           <div>
             <label class="block font-bold text-slate-700 mb-1">Generic Name</label>
-            <input type="text" id="multi-line-generic" placeholder="Auto-fills on brand select" class="w-full p-2.5 bg-slate-100 border rounded-xl"/>
+            <input type="text" id="multi-line-generic" placeholder="Auto-fills on brand select" class="w-full h-10 p-2.5 bg-slate-100 border rounded-xl"/>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3 text-xs">
           <div>
             <label class="block text-slate-600 font-semibold mb-1">Batch No.</label>
-            <input type="text" id="multi-line-batch" placeholder="B101" class="w-full p-2 border rounded-lg bg-white"/>
+            <input type="text" id="multi-line-batch" placeholder="B101" class="w-full h-9 p-2 border rounded-lg bg-white"/>
           </div>
           <div>
             <label class="block text-slate-600 font-semibold mb-1">Expiry Date *</label>
-            <input type="date" id="multi-line-expiry" class="w-full p-2 border rounded-lg bg-white"/>
+            <input type="date" id="multi-line-expiry" class="w-full h-9 p-2 border rounded-lg bg-white"/>
           </div>
         </div>
 
-        <!-- The Pack & Unit Calculator -->
-        <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-2.5">
-          <div class="flex justify-between items-center border-b pb-1">
-            <span class="text-xs font-bold text-slate-700">Pack & Unit Calculation</span>
-            <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-bold uppercase">CALCULATOR</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Pack Qty</label>
-              <input type="number" min="0" step="1" id="multi-pack-qty" value="1" oninput="calculateMultiLineCost()" class="w-full p-2 border rounded text-xs"/>
+        <!-- Sample Calculator Box (Proper Alignment) -->
+        <div class="p-3.5 bg-white border border-slate-200 rounded-xl space-y-3">
+          
+          <!-- Row 1: Quantity, Free Qty, Unit -->
+          <div class="grid grid-cols-3 gap-2.5 items-end text-xs">
+            <div class="flex flex-col justify-end">
+              <label class="block font-bold text-slate-600 mb-1 truncate">Quantity *</label>
+              <input type="number" id="multi-qty" value="10" oninput="calculateMultiLineCost()" class="w-full h-10 p-2 text-center border rounded-xl font-bold bg-white"/>
             </div>
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Pack Size</label>
-              <input type="text" id="multi-pack-size" value="1x1's" oninput="calculateMultiLineCost()" placeholder="e.g. 10x10's" class="w-full p-2 border rounded text-xs"/>
+            <div class="flex flex-col justify-end">
+              <label class="block font-bold text-blue-600 mb-1 truncate">Free Qty</label>
+              <input type="number" id="multi-free-qty" value="0" oninput="calculateMultiLineCost()" placeholder="0" class="w-full h-10 p-2 text-center border-2 border-blue-400 rounded-xl font-bold bg-blue-50/50"/>
             </div>
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Units per Pack</label>
-              <input type="number" min="1" step="1" id="multi-pack-units" value="1" oninput="calculateMultiLineCost()" class="w-full p-2 border rounded text-xs"/>
-            </div>
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Unit I.P (৳)</label>
-              <input type="number" min="0" step="0.01" id="multi-unit-ip" value="0" oninput="calculateMultiLineCost()" class="w-full p-2 border rounded text-xs"/>
-            </div>
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Unit VAT (৳)</label>
-              <input type="number" min="0" step="0.01" id="multi-unit-vat" value="0" oninput="calculateMultiLineCost()" class="w-full p-2 border rounded text-xs"/>
-            </div>
-            <div>
-              <label class="block text-slate-600 font-medium mb-1">Line Discount (৳)</label>
-              <input type="number" min="0" step="0.01" id="multi-line-discount" value="0" oninput="calculateMultiLineCost()" class="w-full p-2 border rounded text-xs"/>
+            <div class="flex flex-col justify-end">
+              <label class="block font-bold text-slate-600 mb-1 truncate">Unit</label>
+              <select id="multi-unit" class="w-full h-10 px-2 border rounded-xl font-bold bg-white">
+                <option value="Pcs">Pcs</option>
+                <option value="Box">Box</option>
+                <option value="Strip">Strip</option>
+              </select>
             </div>
           </div>
-          <div class="purchase-calculation-grid">
-            <div><small>Total Trade Price (I.P)</small><b id="multi-total-ip">৳0.00</b></div>
-            <div><small>Total VAT</small><b id="multi-total-vat">৳0.00</b></div>
-            <div><small>Total Units</small><b id="multi-total-units">0</b></div>
-            <div class="calculated-buy"><small>Calculated Buy Price / Unit</small><b id="multi-calculated-buy">৳0.00</b></div>
-          </div>
-        </div>
 
-        <div class="grid grid-cols-3 gap-2.5 text-xs">
-          <div>
-            <label class="block text-slate-600 font-bold mb-1">Buy Price (৳)</label>
-            <input type="number" step="0.0001" id="multi-buy" required class="w-full p-2.5 border rounded-xl font-bold bg-slate-50"/>
+          <!-- Row 2: Rate & Sell Price -->
+          <div class="grid grid-cols-2 gap-2.5 items-end text-xs">
+            <div class="flex flex-col justify-end">
+              <label class="block font-bold text-slate-600 mb-1 truncate">Rate (Price/Unit) *</label>
+              <input type="number" step="0.001" id="multi-rate" value="5.000" oninput="calculateMultiLineCost()" class="w-full h-10 p-2.5 border rounded-xl font-bold bg-white"/>
+            </div>
+            <div class="flex flex-col justify-end">
+              <label class="block font-bold text-emerald-600 mb-1 truncate">Sell Price / Unit (৳) *</label>
+              <input type="number" step="0.01" id="multi-sell" placeholder="6.00" class="w-full h-10 p-2.5 border rounded-xl font-bold text-emerald-600 bg-white"/>
+            </div>
           </div>
-          <div>
-            <label class="block text-slate-600 font-bold mb-1">Sell Price (৳) *</label>
-            <input type="number" step="0.01" id="multi-sell" required placeholder="0.00" class="w-full p-2.5 border rounded-xl font-bold text-emerald-600 bg-white"/>
+
+          <!-- Row 3: Totals & Taxes -->
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs">
+            <b class="text-slate-700 block text-xs border-b pb-1 font-bold">Totals & Taxes</b>
+            
+            <div class="flex justify-between items-center text-slate-600 py-0.5">
+              <span>Subtotal (Rate x Qty):</span>
+              <span class="font-bold text-slate-800">৳ <span id="multi-calc-subtotal">50.000</span></span>
+            </div>
+
+            <!-- Discount Row -->
+            <div class="flex justify-between items-center gap-2 py-0.5">
+              <span class="text-slate-600 font-semibold shrink-0">Discount:</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <div class="flex items-center border border-amber-300 rounded-lg bg-amber-50 px-1.5 py-1">
+                  <input type="number" id="multi-discount-pct" oninput="calculateMultiLineCost('pct')" placeholder="0" class="w-10 text-right text-xs bg-transparent font-bold outline-none"/>
+                  <span class="text-amber-700 font-bold ml-1 text-xs">%</span>
+                </div>
+                <div class="flex items-center border border-slate-300 rounded-lg bg-white px-1.5 py-1">
+                  <span class="text-slate-400 mr-1 text-xs">৳</span>
+                  <input type="number" id="multi-discount-flat" oninput="calculateMultiLineCost('flat')" value="0.000" class="w-14 text-right text-xs font-bold outline-none"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center font-bold text-sm text-slate-900 border-t pt-1.5">
+              <span>Total Amount:</span>
+              <span class="text-base text-slate-900 font-black">৳ <span id="multi-calc-total">50.000</span></span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-dashed">
+              <div class="bg-emerald-50 p-2 rounded-lg text-emerald-800">
+                <small class="block text-[10px]">স্টকে মোট যোগ হবে:</small>
+                <b id="multi-calc-units" class="text-sm">10</b> <span class="text-[10px]">Units</span>
+              </div>
+              <div class="bg-teal-50 p-2 rounded-lg text-teal-800">
+                <small class="block text-[10px]">প্রকৃত কেনা রেট/Unit:</small>
+                <b id="multi-calc-buy" class="text-sm">৳5.000</b>
+              </div>
+            </div>
           </div>
-          <div>
-            <label class="block text-slate-600 font-bold mb-1">Stock Qty</label>
-            <input type="number" id="multi-stock" required class="w-full p-2.5 border rounded-xl font-bold bg-slate-50"/>
-          </div>
+
+          <input type="hidden" id="multi-buy" value="5.000"/>
+          <input type="hidden" id="multi-stock" value="10"/>
         </div>
 
         <div class="text-right pt-1">
@@ -937,7 +980,7 @@
                 <th class="p-2">#</th>
                 <th class="p-2">Medicine Brand</th>
                 <th class="p-2">Batch/Exp</th>
-                <th class="p-2">Total Units</th>
+                <th class="p-2">Qty + Free = Total</th>
                 <th class="p-2">Unit Buy</th>
                 <th class="p-2">Sell Price</th>
                 <th class="p-2">Line Total</th>
@@ -978,7 +1021,7 @@
         </div>
 
         <button type="button" onclick="saveFullMultiInvoice()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg text-sm flex items-center justify-center gap-2 transition">
-          <span>💾</span> <span>Save Complete Invoice & Update All Stocks (এক ক্লিকে সব সেভ)</span>
+          <span>💾</span> <span>Save Complete Invoice & Update All Stocks (স্বয়ংক্রিয় স্টক যোগ হবে)</span>
         </button>
       </div>
 
@@ -1117,7 +1160,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('m-pack-size')) calculatePurchaseCost();
+      if (document.getElementById('m-qty')) calculateSinglePurchase();
       const pd = document.getElementById('m-purchase-date');
       if (pd) pd.value = new Date().toISOString().split('T')[0];
       updateNetworkStatus(navigator.onLine);
@@ -1294,7 +1337,7 @@
             dropdown.innerHTML = `
               <div class="p-2 bg-slate-50 text-[11px] font-bold text-slate-500 border-b flex justify-between">
                 <span>Search Results (${data.length})</span>
-                <span class="text-emerald-700">Click brand or "Other Brands"</span>
+                <span class="text-emerald-700">Click brand to select</span>
               </div>
             ` + data.map(item => `
               <div onclick="selectMasterMedicine('${item.name.replace(/'/g, "\\'")}', '${(item.generic || '').replace(/'/g, "\\'")}')" 
@@ -1308,14 +1351,6 @@
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold uppercase">
                     ${item.type || 'Medicine'}
                   </span>
-                  ${item.generic ? `
-                    <button 
-                      type="button" 
-                      onclick="event.stopPropagation(); loadOtherBrands('${item.generic.replace(/'/g, "\\'")}')" 
-                      class="text-[10px] bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-bold whitespace-nowrap shadow-sm">
-                      🔄 Other Brands
-                    </button>
-                  ` : ''}
                 </div>
               </div>
             `).join('');
@@ -1332,53 +1367,6 @@
           console.error("Search Error:", err);
         }
       }, 250);
-    }
-
-    async function loadOtherBrands(genericName) {
-      const dropdown = document.getElementById('master-search-dropdown');
-      dropdown.classList.remove('hidden');
-      dropdown.innerHTML = `
-        <div class="p-3 text-center text-xs text-blue-600 font-bold">
-          Searching all brands for: <b>${genericName}</b>...
-        </div>
-      `;
-
-      try {
-        const { data, error } = await db
-          .from('master_medicines')
-          .select('*')
-          .ilike('generic', `%${genericName.trim()}%`)
-          .limit(40);
-
-        if (!error && data && data.length > 0) {
-          dropdown.innerHTML = `
-            <div class="p-2 bg-blue-50 text-[11px] font-bold text-blue-900 border-b flex justify-between items-center sticky top-0 z-10">
-              <span class="truncate">Generic: ${genericName} (${data.length} brands)</span>
-              <button type="button" onclick="searchMasterMedicines(document.getElementById('m-name').value)" class="text-xs text-blue-700 underline font-bold ml-2">✕ Back</button>
-            </div>
-          ` + data.map(item => `
-            <div onclick="selectMasterMedicine('${item.name.replace(/'/g, "\\'")}', '${(item.generic || '').replace(/'/g, "\\'")}')" 
-                 class="p-2.5 hover:bg-emerald-50 cursor-pointer active:bg-emerald-100 flex justify-between items-center border-b">
-              <div>
-                <div class="font-bold text-slate-800 text-xs">${item.name}</div>
-                <div class="text-[10px] text-emerald-700 font-semibold">${item.company || ''}</div>
-              </div>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">
-                ${item.type || 'Medicine'}
-              </span>
-            </div>
-          `).join('');
-        } else {
-          dropdown.innerHTML = `
-            <div class="p-3 text-center text-xs text-slate-500">
-              No other brands found for ${genericName}.
-              <br/><button onclick="searchMasterMedicines(document.getElementById('m-name').value)" class="text-blue-600 underline mt-1">Back</button>
-            </div>
-          `;
-        }
-      } catch (err) {
-        console.error("Load other brands error:", err);
-      }
     }
 
     function selectMasterMedicine(name, generic) {
@@ -1429,7 +1417,7 @@
       const form = document.getElementById('add-med-form');
       form.reset();
       document.getElementById('m-edit-id').value = '';
-      document.getElementById('form-title').innerText = "New Stock Entry";
+      document.getElementById('form-title').innerText = "Add Items to Purchase";
       const headerBox = document.querySelector('.purchase-header-box');
       if (headerBox) {
         headerBox.classList.remove('edit-purchase-disabled');
@@ -1437,23 +1425,66 @@
           el.required = ['m-supplier','m-invoice-no','m-purchase-date'].includes(el.id);
         });
       }
-      document.getElementById('form-submit-btn').innerText = "Save to Stock";
-      document.getElementById('m-purchase-qty').value = 1;
+      document.getElementById('form-submit-btn').innerText = "Save to Stock (স্বয়ংক্রিয় স্টক যোগ হবে)";
+      document.getElementById('m-qty').value = 10;
+      document.getElementById('m-free-qty').value = 0;
+      document.getElementById('m-unit').value = 'Pcs';
+      document.getElementById('m-rate').value = 5.000;
+      document.getElementById('m-discount-pct').value = '';
+      document.getElementById('m-discount-flat').value = '0.000';
       document.getElementById('m-supplier').value = '';
       document.getElementById('m-invoice-no').value = '';
       document.getElementById('m-purchase-date').value = new Date().toISOString().split('T')[0];
       document.getElementById('m-paid-amount').value = 0;
       document.getElementById('m-payment-method').value = 'Cash';
-      document.getElementById('m-pack-size').value = "1x1's";
-      document.getElementById('m-pack-units').value = 1;
-      document.getElementById('m-unit-ip').value = 0;
-      document.getElementById('m-unit-vat').value = 0;
-      document.getElementById('m-line-discount').value = 0;
-      calculatePurchaseCost();
+      calculateSinglePurchase();
       form.classList.add('hidden');
     }
 
-    // ================== INVENTORY: ADD, EDIT, DELETE ==================
+    // ================== SAMPLE PHOTO CALCULATOR (Single Form) ==================
+    function calculateSinglePurchase(changed = 'pct') {
+      const qty = Math.max(0, parseFloat(document.getElementById('m-qty')?.value) || 0);
+      const freeQty = Math.max(0, parseFloat(document.getElementById('m-free-qty')?.value) || 0);
+      const rate = Math.max(0, parseFloat(document.getElementById('m-rate')?.value) || 0);
+
+      const subtotal = qty * rate;
+      const subEl = document.getElementById('m-calc-subtotal');
+      if (subEl) subEl.innerText = subtotal.toFixed(3);
+
+      let discPct = parseFloat(document.getElementById('m-discount-pct')?.value) || 0;
+      let discFlat = parseFloat(document.getElementById('m-discount-flat')?.value) || 0;
+
+      if (changed === 'pct') {
+        discFlat = (subtotal * discPct) / 100;
+        const flatEl = document.getElementById('m-discount-flat');
+        if (flatEl) flatEl.value = discFlat.toFixed(3);
+      } else {
+        discPct = subtotal > 0 ? (discFlat / subtotal) * 100 : 0;
+        const pctEl = document.getElementById('m-discount-pct');
+        if (pctEl) pctEl.value = discPct.toFixed(1);
+      }
+
+      const totalAmount = Math.max(0, subtotal - discFlat);
+      const totEl = document.getElementById('m-calc-total');
+      if (totEl) totEl.innerText = totalAmount.toFixed(3);
+
+      const totalUnits = qty + freeQty;
+      const unitsEl = document.getElementById('m-calc-units');
+      if (unitsEl) unitsEl.innerText = totalUnits;
+
+      const perUnitBuy = totalUnits > 0 ? (totalAmount / totalUnits) : rate;
+      const buyEl = document.getElementById('m-calc-buy');
+      if (buyEl) buyEl.innerText = '৳ ' + perUnitBuy.toFixed(3);
+
+      const buyField = document.getElementById('m-buy');
+      const stockField = document.getElementById('m-stock');
+      if (buyField) buyField.value = perUnitBuy.toFixed(4);
+      if (stockField) stockField.value = totalUnits;
+
+      return { qty, freeQty, totalUnits, rate, perUnitBuy, totalAmount, discount: discFlat };
+    }
+
+    // ================== INVENTORY: ADD, EDIT, DELETE (Stock Addition Fixed) ==================
     async function fetchMedicines() {
       try {
         const { data, error } = await db.from('medicines').select('*').order('name', { ascending: true });
@@ -1468,47 +1499,6 @@
       }
     }
 
-    function getPackUnitCount(value) {
-      const normalized = String(value || '').toLowerCase().replace(/,/g, '.');
-      const matches = normalized.match(/\d+(?:\.\d+)?/g);
-      if (!matches || matches.length === 0) return 1;
-      const first = Number(matches[0]) || 1;
-      const second = matches.length > 1 ? (Number(matches[1]) || 1) : 1;
-      return Math.max(1, Math.round(first * second));
-    }
-
-    function calculatePurchaseCost() {
-      const get = id => Number(document.getElementById(id)?.value || 0);
-      const packSize = document.getElementById('m-pack-size');
-      const packUnitsInput = document.getElementById('m-pack-units');
-      const qtyPacks = Math.max(0, get('m-purchase-qty'));
-      const unitIP = Math.max(0, get('m-unit-ip'));
-      const unitVAT = Math.max(0, get('m-unit-vat'));
-      const discount = Math.max(0, get('m-line-discount'));
-      if (packSize && packUnitsInput && document.activeElement === packSize) {
-        packUnitsInput.value = getPackUnitCount(packSize.value);
-      }
-      const unitsPerPack = Math.max(1, Math.floor(get('m-pack-units') || 1));
-      const totalUnits = qtyPacks * unitsPerPack;
-      const totalIP = qtyPacks * unitIP;
-      const totalVAT = qtyPacks * unitVAT;
-      const netPurchase = Math.max(0, totalIP + totalVAT - discount);
-      const perUnitBuy = totalUnits > 0 ? netPurchase / totalUnits : 0;
-
-      const money = n => '৳' + n.toFixed(2);
-      const set = (id, value) => { const el = document.getElementById(id); if (el) el.innerText = value; };
-      set('m-total-ip', money(totalIP));
-      set('m-total-vat', money(totalVAT));
-      set('m-total-units', totalUnits.toLocaleString());
-      set('m-calculated-buy', money(perUnitBuy));
-
-      const buyField = document.getElementById('m-buy');
-      const stockField = document.getElementById('m-stock');
-      if (buyField) buyField.value = perUnitBuy.toFixed(4);
-      if (stockField) stockField.value = totalUnits;
-      return { totalUnits, perUnitBuy, totalIP, totalVAT, discount, unitsPerPack, qtyPacks };
-    }
-
     function editMedicine(id) {
       const med = medicinesList.find(m => m.id === id);
       if(!med) return;
@@ -1518,17 +1508,15 @@
       document.getElementById('m-generic').value = med.generic || '';
       document.getElementById('m-batch').value = med.batch || '';
       document.getElementById('m-expiry').value = med.expiry_date || '';
+      document.getElementById('m-qty').value = med.stock || 1;
+      document.getElementById('m-free-qty').value = 0;
+      document.getElementById('m-rate').value = med.buy_price || 0;
+      document.getElementById('m-discount-pct').value = 0;
+      document.getElementById('m-discount-flat').value = 0;
+      calculateSinglePurchase();
+
       document.getElementById('m-buy').value = med.buy_price || 0;
       document.getElementById('m-sell').value = med.sell_price || 0;
-      document.getElementById('m-stock').value = med.stock || 0;
-      document.getElementById('m-purchase-qty').value = med.stock || 1;
-      document.getElementById('m-pack-size').value = "1x1's";
-      document.getElementById('m-pack-units').value = 1;
-      document.getElementById('m-unit-ip').value = med.buy_price || 0;
-      document.getElementById('m-unit-vat').value = 0;
-      document.getElementById('m-line-discount').value = 0;
-      calculatePurchaseCost();
-      document.getElementById('m-buy').value = med.buy_price || 0;
       document.getElementById('m-stock').value = med.stock || 0;
 
       document.getElementById('form-title').innerText = "✏️ Edit Medicine Stock";
@@ -1561,10 +1549,11 @@
       }
     }
 
+    // 👉 STOCK ADDITION LOGIC: (আগের ৪ টি + নতুন ১০ টি = ১৪ টি হবে)
     async function saveMedicine(e) {
       e.preventDefault();
       const editId = document.getElementById('m-edit-id').value;
-      const purchase = calculatePurchaseCost();
+      const purchase = calculateSinglePurchase();
       const supplierName = document.getElementById('m-supplier').value.trim();
       const invoiceNo = document.getElementById('m-invoice-no').value.trim();
       const purchaseDate = document.getElementById('m-purchase-date').value;
@@ -1576,7 +1565,7 @@
         return;
       }
       if (!editId && purchase.totalUnits <= 0) {
-        alert('Purchase Qty এবং Pack Size সঠিকভাবে দিন।');
+        alert('Quantity সঠিকভাবে দিন।');
         return;
       }
 
@@ -1591,6 +1580,7 @@
       };
 
       let savedMedicineId = editId;
+
       if (editId) {
         const { error } = await db.from('medicines').update(medData).eq('id', editId);
         if (error) { alert("Update Failed: " + error.message); return; }
@@ -1600,19 +1590,44 @@
         return;
       }
 
-      const { data: medRows, error: medError } = await db.from('medicines').insert([medData]).select('id');
-      if (medError) { alert("Medicine Save Failed: " + medError.message); return; }
-      savedMedicineId = medRows && medRows[0] ? medRows[0].id : null;
+      // 👉 নতুন কেনা হলে চেক করব ওষুধটি আগে থেকেই দোকানে আছে কি না:
+      const { data: existingList } = await db.from('medicines')
+        .select('*')
+        .ilike('name', medData.name)
+        .limit(1);
+
+      const existingMed = (existingList && existingList.length > 0) ? existingList[0] : null;
+
+      if (existingMed) {
+        // 🔥 আগে থেকেই আছে! আগের ৪ টি + নতুন ১০ টি = ১৪ টি
+        const oldStock = parseInt(existingMed.stock) || 0;
+        const newStockUnits = purchase.totalUnits;
+        const updatedTotalStock = oldStock + newStockUnits;
+
+        const { error: updateStockErr } = await db.from('medicines').update({
+          stock: updatedTotalStock,
+          buy_price: medData.buy_price,
+          sell_price: medData.sell_price > 0 ? medData.sell_price : existingMed.sell_price,
+          batch: medData.batch || existingMed.batch,
+          expiry_date: medData.expiry_date || existingMed.expiry_date,
+          generic: medData.generic || existingMed.generic
+        }).eq('id', existingMed.id);
+
+        if (updateStockErr) { alert("Stock Update Failed: " + updateStockErr.message); return; }
+        savedMedicineId = existingMed.id;
+      } else {
+        const { data: medRows, error: medError } = await db.from('medicines').insert([medData]).select('id');
+        if (medError) { alert("Medicine Save Failed: " + medError.message); return; }
+        savedMedicineId = medRows && medRows[0] ? medRows[0].id : null;
+      }
+
       if (!savedMedicineId) {
-        alert('Medicine was saved, but its ID could not be read. Purchase register was not created.');
+        alert('Medicine was saved, but its ID could not be read.');
         fetchMedicines();
         return;
       }
 
-      const lineIP = purchase.totalIP;
-      const lineVAT = purchase.totalVAT;
-      const lineDiscount = purchase.discount;
-      const lineTotal = Math.max(0, lineIP + lineVAT - lineDiscount);
+      const lineTotal = purchase.totalAmount;
       const paidForInvoice = paidAmount;
 
       let purchaseId = null;
@@ -1654,24 +1669,18 @@
       }
 
       if (purchaseId) {
-        const { error: itemError } = await db.from('purchase_items').insert([{
+        await db.from('purchase_items').insert([{
           purchase_id: purchaseId, medicine_id: String(savedMedicineId),
           medicine_name: medData.name, batch_no: medData.batch,
-          expiry_date: medData.expiry_date, pack_qty: purchase.qtyPacks,
-          pack_size: document.getElementById('m-pack-size').value,
-          units_per_pack: purchase.unitsPerPack, total_units: purchase.totalUnits,
-          unit_ip: Number(document.getElementById('m-unit-ip').value || 0),
-          unit_vat: Number(document.getElementById('m-unit-vat').value || 0),
-          line_discount: lineDiscount, line_total: lineTotal,
+          expiry_date: medData.expiry_date, pack_qty: purchase.qty,
+          total_units: purchase.totalUnits,
+          unit_ip: purchase.rate,
+          line_discount: purchase.discount, line_total: lineTotal,
           buy_price_per_unit: purchase.perUnitBuy
         }]);
-        if (itemError) {
-          alert('Purchase invoice saved, but its medicine line could not be saved: ' + itemError.message);
-          cancelEdit(); fetchMedicines(); loadPurchaseRegister(); return;
-        }
       }
 
-      alert('Purchase and medicine stock saved successfully!');
+      alert('Purchase and medicine stock saved successfully! স্টকে যোগ নিশ্চিত হয়েছে।');
       cancelEdit();
       fetchMedicines();
       loadPurchaseRegister();
@@ -2362,7 +2371,7 @@
       alertsBox.innerHTML = alertHtml || `<p class="text-slate-400">No urgent alerts found.</p>`;
     }
 
-    // ================== MULTI-MEDICINE INVOICE LOGIC ==================
+    // ================== MULTI-MEDICINE INVOICE (Sample Calculator) ==================
     function openMultiInvoiceModal() {
       multiDraftInvoiceItems = [];
       document.getElementById('multi-supplier').value = '';
@@ -2384,51 +2393,57 @@
       document.getElementById('multi-line-generic').value = '';
       document.getElementById('multi-line-batch').value = '';
       document.getElementById('multi-line-expiry').value = '';
-      document.getElementById('multi-pack-qty').value = 1;
-      document.getElementById('multi-pack-size').value = "1x1's";
-      document.getElementById('multi-pack-units').value = 1;
-      document.getElementById('multi-unit-ip').value = 0;
-      document.getElementById('multi-unit-vat').value = 0;
-      document.getElementById('multi-line-discount').value = 0;
+      document.getElementById('multi-qty').value = 10;
+      document.getElementById('multi-free-qty').value = 0;
+      document.getElementById('multi-unit').value = 'Pcs';
+      document.getElementById('multi-rate').value = 5.000;
+      document.getElementById('multi-discount-pct').value = '';
+      document.getElementById('multi-discount-flat').value = '0.000';
       document.getElementById('multi-sell').value = '';
       closeMultiDropdown();
       calculateMultiLineCost();
     }
 
-    function calculateMultiLineCost() {
-      const get = id => Number(document.getElementById(id)?.value || 0);
-      const packSizeEl = document.getElementById('multi-pack-size');
-      const packUnitsEl = document.getElementById('multi-pack-units');
+    function calculateMultiLineCost(changed = 'pct') {
+      const qty = Math.max(0, parseFloat(document.getElementById('multi-qty')?.value) || 0);
+      const freeQty = Math.max(0, parseFloat(document.getElementById('multi-free-qty')?.value) || 0);
+      const rate = Math.max(0, parseFloat(document.getElementById('multi-rate')?.value) || 0);
 
-      if (packSizeEl && packUnitsEl && document.activeElement === packSizeEl) {
-        packUnitsEl.value = getPackUnitCount(packSizeEl.value);
+      const subtotal = qty * rate;
+      const subEl = document.getElementById('multi-calc-subtotal');
+      if (subEl) subEl.innerText = subtotal.toFixed(3);
+
+      let discPct = parseFloat(document.getElementById('multi-discount-pct')?.value) || 0;
+      let discFlat = parseFloat(document.getElementById('multi-discount-flat')?.value) || 0;
+
+      if (changed === 'pct') {
+        discFlat = (subtotal * discPct) / 100;
+        const flatEl = document.getElementById('multi-discount-flat');
+        if (flatEl) flatEl.value = discFlat.toFixed(3);
+      } else {
+        discPct = subtotal > 0 ? (discFlat / subtotal) * 100 : 0;
+        const pctEl = document.getElementById('multi-discount-pct');
+        if (pctEl) pctEl.value = discPct.toFixed(1);
       }
 
-      const packQty = Math.max(0, get('multi-pack-qty'));
-      const unitsPerPack = Math.max(1, Math.floor(get('multi-pack-units') || 1));
-      const unitIP = Math.max(0, get('multi-unit-ip'));
-      const unitVAT = Math.max(0, get('multi-unit-vat'));
-      const discount = Math.max(0, get('multi-line-discount'));
+      const totalAmount = Math.max(0, subtotal - discFlat);
+      const totEl = document.getElementById('multi-calc-total');
+      if (totEl) totEl.innerText = totalAmount.toFixed(3);
 
-      const totalUnits = packQty * unitsPerPack;
-      const totalIP = packQty * unitIP;
-      const totalVAT = packQty * unitVAT;
-      const netLineTotal = Math.max(0, totalIP + totalVAT - discount);
-      const perUnitBuy = totalUnits > 0 ? (netLineTotal / totalUnits) : 0;
+      const totalUnits = qty + freeQty;
+      const unitsEl = document.getElementById('multi-calc-units');
+      if (unitsEl) unitsEl.innerText = totalUnits;
 
-      const money = n => '৳' + n.toFixed(2);
-      const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
-      setTxt('multi-total-ip', money(totalIP));
-      setTxt('multi-total-vat', money(totalVAT));
-      setTxt('multi-total-units', totalUnits.toLocaleString());
-      setTxt('multi-calculated-buy', money(perUnitBuy));
+      const perUnitBuy = totalUnits > 0 ? (totalAmount / totalUnits) : rate;
+      const buyEl = document.getElementById('multi-calc-buy');
+      if (buyEl) buyEl.innerText = '৳ ' + perUnitBuy.toFixed(3);
 
       const buyField = document.getElementById('multi-buy');
       const stockField = document.getElementById('multi-stock');
       if (buyField) buyField.value = perUnitBuy.toFixed(4);
       if (stockField) stockField.value = totalUnits;
 
-      return { packQty, unitsPerPack, totalUnits, totalIP, totalVAT, discount, netLineTotal, perUnitBuy };
+      return { qty, freeQty, totalUnits, rate, perUnitBuy, netLineTotal: totalAmount, discount: discFlat };
     }
 
     function searchMasterMedicinesMulti(query) {
@@ -2493,12 +2508,11 @@
 
       multiDraftInvoiceItems.push({
         name, generic, batch, expiry,
-        packQty: calc.packQty,
-        packSize: document.getElementById('multi-pack-size').value,
-        unitsPerPack: calc.unitsPerPack,
-        unitIP: calc.unitIP,
-        unitVAT: calc.unitVAT,
-        lineDiscount: calc.discount,
+        qty: calc.qty,
+        freeQty: calc.freeQty,
+        unit: document.getElementById('multi-unit')?.value || 'Pcs',
+        rate: calc.rate,
+        discount: calc.discount,
         totalUnits: calc.totalUnits,
         unitBuy: calc.perUnitBuy,
         sellPrice: sellPrice,
@@ -2527,7 +2541,7 @@
             <td class="p-2 font-bold">${idx + 1}</td>
             <td class="p-2 font-bold text-slate-800">${escapePurchaseText(item.name)}</td>
             <td class="p-2">${escapePurchaseText(item.batch || '-')}<br><span class="text-[10px] text-slate-400">${item.expiry}</span></td>
-            <td class="p-2 font-bold">${item.totalUnits}</td>
+            <td class="p-2 font-bold">${item.qty} + ${item.freeQty} = <span class="text-emerald-700">${item.totalUnits}</span> ${item.unit}</td>
             <td class="p-2 font-semibold">৳${item.unitBuy.toFixed(2)}</td>
             <td class="p-2 font-bold text-emerald-600">৳${item.sellPrice.toFixed(2)}</td>
             <td class="p-2 font-black text-slate-900">৳${item.lineTotal.toFixed(2)}</td>
@@ -2554,6 +2568,7 @@
       if (dueEl) dueEl.innerText = '৳ ' + due.toFixed(2);
     }
 
+    // 👉 MULTI-INVOICE STOCK ADDITION: (আগের ৪ টি + নতুন ১০ টি = ১৪ টি হবে)
     async function saveFullMultiInvoice() {
       const supplier = document.getElementById('multi-supplier').value.trim();
       const invoiceNo = document.getElementById('multi-invoice-no').value.trim();
@@ -2573,7 +2588,6 @@
       const totalAmount = multiDraftInvoiceItems.reduce((sum, item) => sum + item.lineTotal, 0);
       const dueAmount = Math.max(0, totalAmount - paid);
 
-      // 1. Insert into purchases table
       const { data: invData, error: invErr } = await db.from('purchases').insert([{
         supplier_name: supplier,
         invoice_no: invoiceNo,
@@ -2587,20 +2601,43 @@
       if (invErr) { alert("Failed to save purchase invoice: " + invErr.message); return; }
       const purchaseId = invData && invData[0] ? invData[0].id : null;
 
-      // 2. Loop through all items and update medicines stock and insert into purchase_items
       for (let item of multiDraftInvoiceItems) {
-        const medData = {
-          name: item.name,
-          generic: item.generic,
-          batch: item.batch,
-          expiry_date: item.expiry,
-          buy_price: item.unitBuy,
-          sell_price: item.sellPrice,
-          stock: item.totalUnits
-        };
+        const { data: existingList } = await db.from('medicines')
+          .select('*')
+          .ilike('name', item.name.trim())
+          .limit(1);
 
-        const { data: medRows, error: medError } = await db.from('medicines').insert([medData]).select('id');
-        const savedMedId = medRows && medRows[0] ? medRows[0].id : null;
+        const existingMed = (existingList && existingList.length > 0) ? existingList[0] : null;
+        let savedMedId = null;
+
+        if (existingMed) {
+          // 🔥 আগে থেকে আছে! (৪ + ১০ = ১৪ টি)
+          const oldStock = Number(existingMed.stock || 0);
+          const newTotalStock = oldStock + Number(item.totalUnits);
+
+          await db.from('medicines').update({
+            stock: newTotalStock,
+            buy_price: item.unitBuy,
+            sell_price: item.sellPrice > 0 ? item.sellPrice : existingMed.sell_price,
+            batch: item.batch || existingMed.batch,
+            expiry_date: item.expiry || existingMed.expiry_date,
+            generic: item.generic || existingMed.generic
+          }).eq('id', existingMed.id);
+
+          savedMedId = existingMed.id;
+        } else {
+          const medData = {
+            name: item.name,
+            generic: item.generic,
+            batch: item.batch,
+            expiry_date: item.expiry,
+            buy_price: item.unitBuy,
+            sell_price: item.sellPrice,
+            stock: item.totalUnits
+          };
+          const { data: medRows } = await db.from('medicines').insert([medData]).select('id');
+          savedMedId = medRows && medRows[0] ? medRows[0].id : null;
+        }
 
         if (purchaseId && savedMedId) {
           await db.from('purchase_items').insert([{
@@ -2609,20 +2646,17 @@
             medicine_name: item.name,
             batch_no: item.batch,
             expiry_date: item.expiry,
-            pack_qty: item.packQty,
-            pack_size: item.packSize,
-            units_per_pack: item.unitsPerPack,
+            pack_qty: item.qty,
             total_units: item.totalUnits,
-            unit_ip: item.unitIP,
-            unit_vat: item.unitVAT,
-            line_discount: item.lineDiscount,
+            unit_ip: item.rate,
+            line_discount: item.discount,
             line_total: item.lineTotal,
             buy_price_per_unit: item.unitBuy
           }]);
         }
       }
 
-      alert("Invoice #" + invoiceNo + " with " + multiDraftInvoiceItems.length + " medicines saved successfully!");
+      alert("Invoice #" + invoiceNo + " with " + multiDraftInvoiceItems.length + " medicines saved successfully! সকল ওষুধের স্টকে নতুন পরিমাণ যোগ হয়েছে।");
       closeMultiInvoiceModal();
       fetchMedicines();
       loadPurchaseRegister();
@@ -2630,4 +2664,3 @@
   </script>
 </body>
 </html>
-
