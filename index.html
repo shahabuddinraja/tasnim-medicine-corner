@@ -18,19 +18,21 @@
 
   <style>
     :root {
-      --navy: #172554;
+      --navy: #13283f;
+      --navy2: #1d3b57;
       --teal: #087f75;
-      --paper: #f3f6fc;
-      --ink: #172033;
+      --teal2: #10a493;
+      --paper: #f4f6f8;
+      --ink: #1d2d3b;
+      --muted: #718092;
       --line: #e2e8ed;
+      --white: #fff;
       --shadow: 0 8px 24px rgba(19, 40, 63, 0.06);
     }
     * { box-sizing: border-box; }
     html, body {
-      width: 100%;
-      min-height: 100%;
-      background: var(--paper) !important;
-      color: var(--ink) !important;
+      width: 100%; min-height: 100%;
+      background: var(--paper) !important; color: var(--ink) !important;
       font-family: 'DM Sans', 'Hind Siliguri', sans-serif !important;
       overflow-x: hidden;
     }
@@ -40,12 +42,11 @@
 
     header.app-header {
       height: 72px; padding: 0 16px;
-      background: linear-gradient(112deg,#172554 0%,#263f80 58%,#176b91 100%) !important;
-      box-shadow: 0 4px 18px rgba(12, 30, 48, 0.15);
-      position: sticky; top: 0; z-index: 50;
-      display: flex; justify-content: space-between; align-items: center;
+      background: var(--navy) !important; box-shadow: 0 4px 18px rgba(12, 30, 48, 0.15);
+      position: sticky; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center;
     }
 
+    /* DESKTOP PC LAYOUT */
     @media (min-width: 992px) {
       body { padding-bottom: 30px !important; }
       body > nav {
@@ -65,10 +66,7 @@
       body > nav button.text-emerald-600 { background: #e8f5f2 !important; color: var(--teal) !important; }
       body > nav button.text-slate-400 { color: #64748b !important; }
       body > nav button.text-slate-400:hover { background: #f1f5f9 !important; color: var(--navy) !important; }
-      main {
-        margin-left: 220px !important; width: calc(100% - 220px) !important;
-        max-width: 1600px !important; padding: 26px 32px 50px !important;
-      }
+      main { margin-left: 220px !important; width: calc(100% - 220px) !important; max-width: 1600px !important; padding: 26px 32px 50px !important; }
       #tab-pos.active { display: grid !important; grid-template-columns: minmax(0, 1.25fr) minmax(380px, 0.85fr) !important; gap: 26px !important; }
       #tab-stock.active { display: grid !important; grid-template-columns: 460px minmax(0, 1fr) !important; gap: 24px !important; }
       #tab-stock > button, #tab-stock > .top-actions { grid-column: 1 / -1 !important; }
@@ -82,35 +80,18 @@
       body { padding-bottom: 95px !important; }
       header.app-header { height: 68px; padding: 0 10px; }
       main { width: 100% !important; max-width: 600px !important; margin: 0 auto !important; padding: 16px 12px 24px !important; }
-      
       body > nav {
         position: fixed !important; bottom: 12px !important; left: 50% !important; transform: translateX(-50%) !important;
         width: min(480px, calc(100% - 20px)) !important; display: grid !important; grid-template-columns: repeat(4, 1fr) !important;
         padding: 6px 4px !important; border-radius: 20px !important; background: rgba(255, 255, 255, 0.97) !important;
         box-shadow: 0 10px 30px rgba(19, 40, 63, 0.16) !important; border: 1px solid var(--line) !important; z-index: 45 !important;
-        backdrop-filter: blur(12px) !important;
       }
       body > nav button { 
-        display: flex !important; 
-        flex-direction: column !important; 
-        align-items: center !important; 
-        justify-content: center !important; 
-        padding: 5px 2px !important;
-        border-radius: 12px !important;
-        gap: 3px !important;
+        display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; 
+        padding: 5px 2px !important; border-radius: 12px !important; gap: 3px !important;
       }
-      /* নিচের বাটনের ফন্ট ও সাইজ পারফেক্ট অ্যাডজাস্ট */
-      body > nav button span:first-child { 
-        font-size: 18px !important; 
-        line-height: 1 !important; 
-      }
-      body > nav button span:last-child { 
-        font-size: 10px !important; 
-        font-weight: 700 !important; 
-        letter-spacing: -0.2px !important;
-        line-height: 1 !important;
-        white-space: nowrap !important;
-      }
+      body > nav button span:first-child { font-size: 18px !important; line-height: 1 !important; }
+      body > nav button span:last-child { font-size: 10px !important; font-weight: 700 !important; letter-spacing: -0.2px !important; line-height: 1 !important; white-space: nowrap !important; }
       .premium-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
     }
 
@@ -141,6 +122,29 @@
       header.app-header, body > nav, .no-print { display: none !important; }
       #printable-receipt, #printable-receipt * { visibility: visible !important; }
       #printable-receipt { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; max-width: 80mm !important; }
+    }
+  </style>
+
+  <style id="v8-visual-redesign">
+    :root {
+      --navy: #172554; --navy2: #243b73; --teal: #2563eb; --teal2: #06b6d4;
+      --paper: #f3f6fc; --ink: #172033; --muted: #718096; --line: #e4eaf4; --white: #fff;
+      --shadow: 0 10px 28px rgba(28, 48, 91, .075);
+    }
+    header.app-header {
+      background: linear-gradient(112deg,#172554 0%,#263f80 58%,#176b91 100%) !important;
+      box-shadow: 0 8px 26px rgba(23,37,84,.22) !important;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    header.app-header > div:first-child > div:first-child {
+      background: linear-gradient(145deg,#22d3ee,#3b82f6) !important;
+      box-shadow: 0 5px 14px rgba(6,182,212,.25) !important;
+    }
+    body > nav button.text-emerald-600 {
+      background: linear-gradient(135deg,#e8f1ff,#e7faff) !important; color: #2458c6 !important;
+    }
+    #tab-purchases > div:first-child, #tab-reports > div:first-child {
+      background: linear-gradient(115deg,#172554,#263f80 65%,#087e9a) !important; border: 0 !important; color: white !important;
     }
   </style>
 </head>
@@ -213,7 +217,7 @@
     </div>
     <div class="flex items-center gap-1.5 shrink-0">
       <button onclick="openSettingsModal()" id="btn-settings" title="Settings" class="h-8 px-2 sm:px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold shadow-sm transition flex items-center gap-1"><span>⚙️</span><span class="hidden sm:inline">PIN</span></button>
-      <button onclick="lockApp()" title="Lock Screen" class="h-8 px-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-xs font-bold shadow transition flex items-center gap-1"><span>🔒</span><span class="hidden sm:inline">Lock</span></button>
+      <button onclick="lockApp()" title="Lock Screen" class="h-8 px-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-xs font-bold shadow transition flex items-center gap-1"><span>🔒</span><span class="hidden sm:inline">Lock</span></button>
     </div>
   </header>
 
@@ -337,7 +341,7 @@
               <span class="font-bold text-slate-800">৳ <span id="m-calc-subtotal">0.000</span></span>
             </div>
 
-            <!-- Discount Row: 100% Contained -->
+            <!-- Discount Row: 100% Contained Inside Card -->
             <div class="flex justify-between items-center gap-1.5 py-1">
               <span class="text-slate-600 font-semibold text-xs shrink-0">Discount:</span>
               <div class="flex items-center gap-1.5 shrink-0">
@@ -353,8 +357,7 @@
             </div>
 
             <div class="flex justify-between items-center font-bold text-sm text-slate-900 border-t pt-1.5">
-              <span>Total Amount:</span>
-              <span class="text-base text-slate-900 font-black">৳ <span id="m-calc-total">0.000</span></span>
+              <span>Total Amount:</span><span class="text-base text-slate-900 font-black">৳ <span id="m-calc-total">0.000</span></span>
             </div>
 
             <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-dashed">
@@ -488,7 +491,7 @@
         </div>
       </div>
 
-      <!-- DAILY SALES REPORT PANEL -->
+      <!-- DAILY SALES REPORT PANEL (Edit + Delete বাটন সহ) -->
       <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-3">
         <div class="flex justify-between items-center">
           <div><h3 class="font-bold text-sm text-slate-800">Daily Sales Analytics & Download</h3><p class="text-xs text-slate-400">View by date and export PDF report</p></div>
@@ -592,7 +595,7 @@
               <span>Subtotal (Rate x Qty):</span>
               <span class="font-bold text-slate-800">৳ <span id="multi-calc-subtotal">0.000</span></span>
             </div>
-            <!-- Discount Row -->
+            <!-- Discount Row: 100% Contained -->
             <div class="flex justify-between items-center gap-1.5 py-1">
               <span class="text-slate-600 font-semibold text-xs shrink-0">Discount:</span>
               <div class="flex items-center gap-1.5 shrink-0">
@@ -1422,6 +1425,7 @@
       });
     }
 
+    // 👉 EDIT ও DELETE বাটন দুটোই নিশ্চিত করা হয়েছে
     function renderDailySalesReport() {
       const rows = getSelectedDateSales();
       const total = rows.reduce((sum,s) => sum + Number(s.net_amount ?? s.total_amount ?? 0), 0);
@@ -1431,16 +1435,88 @@
       if (!body) return;
       if (!rows.length) { body.innerHTML = '<tr><td colspan="4" class="p-3 text-center text-slate-400">এই তারিখে কোনো বিক্রয় পাওয়া যায়নি।</td></tr>'; return; }
       body.innerHTML = rows.map(s => `<tr>
-        <td><b>#${s.id}</b></td><td>${new Date(s.created_at).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</td>
+        <td><b>#${escapePurchaseText(String(s.id ?? '-'))}</b></td>
+        <td>${new Date(s.created_at).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</td>
         <td>৳${Number(s.net_amount ?? s.total_amount ?? 0).toFixed(2)}</td>
-        <td><button type="button" class="text-red-600 font-bold" onclick="deleteDailySale('${s.id}')">Delete</button></td>
+        <td class="text-right">
+          <button type="button" class="text-blue-600 font-bold mr-2 hover:underline" onclick="editDailySale('${String(s.id).replace(/'/g, '')}')">Edit</button>
+          <button type="button" class="text-red-600 font-bold hover:underline" onclick="deleteDailySale('${String(s.id).replace(/'/g, '')}')">Delete</button>
+        </td>
       </tr>`).join('');
     }
 
+    // 👉 সম্পূর্ণ EDIT DAILY SALE ফাংশন
+    async function editDailySale(id) {
+      const sale = yearlySalesCache.find(x => String(x.id) === String(id));
+      if (!sale) { alert('বিক্রয়ের তথ্য পাওয়া যায়নি।'); return; }
+      const items = Array.isArray(sale.items) ? sale.items.map(x => ({...x})) : [];
+      if (!items.length) { alert('এই বিক্রয়ের পণ্যের তালিকা নেই; Edit করা যাচ্ছে না।'); return; }
+      if (!confirm(`Invoice #${id} সম্পাদনা করবেন? প্রতিটি পণ্যের বর্তমান পরিমাণ দেখানো হবে।`)) return;
+      let subtotal = 0;
+      for (const item of items) {
+        const oldQty = Number(item.qty || 0);
+        const answer = prompt(`${item.name || item.medicine_name || 'Medicine'}\nবর্তমান Qty: ${oldQty}\nনতুন Qty লিখুন (0 দিলে বাদ যাবে):`, String(oldQty));
+        if (answer === null) return;
+        const qty = Number(answer);
+        if (!Number.isInteger(qty) || qty < 0) { alert('Qty অবশ্যই ০ বা তার বেশি পূর্ণসংখ্যা হতে হবে।'); return; }
+        item.qty = qty;
+        subtotal += Number(item.sell_price || item.price || 0) * qty;
+      }
+      const discountAnswer = prompt('Discount amount:', String(Number(sale.discount || 0)));
+      if (discountAnswer === null) return;
+      const discount = Number(discountAnswer);
+      if (!Number.isFinite(discount) || discount < 0 || discount > subtotal) { alert('Discount সঠিক নয়।'); return; }
+      const newItems = items.filter(x => Number(x.qty) > 0);
+      const changes = new Map();
+      for (const item of items) {
+        const mid = item.id || item.medicine_id;
+        if (!mid) continue;
+        const oldItem = (Array.isArray(sale.items) ? sale.items : []).find(x => String(x.id || x.medicine_id) === String(mid));
+        changes.set(String(mid), { id: mid, oldQty: Number(oldItem?.qty || 0), newQty: Number(item.qty || 0) });
+      }
+      const stockUpdates = [];
+      for (const change of changes.values()) {
+        const {data: med, error} = await db.from('medicines').select('stock').eq('id', change.id).maybeSingle();
+        if (error || !med) { alert('Medicine stock যাচাই করা যায়নি। ' + (error?.message || '')); return; }
+        const adjusted = Number(med.stock || 0) + change.oldQty - change.newQty;
+        if (adjusted < 0) { alert('পর্যাপ্ত স্টক নেই। বিক্রয় পরিবর্তন করা যাচ্ছে না।'); return; }
+        stockUpdates.push({id: change.id, stock: adjusted});
+      }
+      const {error: updateError} = await db.from('sales').update({total_amount: subtotal, discount, net_amount: Math.max(0, subtotal-discount), items: newItems}).eq('id', id);
+      if (updateError) { alert('বিক্রয় আপডেট হয়নি: ' + updateError.message); return; }
+      for (const stock of stockUpdates) {
+        const {error} = await db.from('medicines').update({stock: stock.stock}).eq('id', stock.id);
+        if (error) { alert('বিক্রয় আপডেট হয়েছে, তবে স্টক আপডেটে সমস্যা: ' + error.message); break; }
+      }
+      alert('Daily Sale আপডেট হয়েছে।');
+      await fetchMedicines();
+      await loadYearlySalesData();
+    }
+
+    // 👉 সম্পূর্ণ DELETE DAILY SALE ফাংশন
     async function deleteDailySale(id) {
-      if (!confirm(`Invoice #${id} Delete করবেন?`)) return;
-      await db.from('sales').delete().eq('id', id);
-      await loadDashboardData();
+      const sale = yearlySalesCache.find(x => String(x.id) === String(id));
+      if (!sale) { alert('বিক্রয়ের তথ্য পাওয়া যায়নি।'); return; }
+      if (!confirm(`Invoice #${id} Delete করবেন? বিক্রিত পণ্য স্টকে ফেরত যোগ হবে।`)) return;
+      const items = Array.isArray(sale.items) ? sale.items : [];
+      const stockUpdates = [];
+      for (const item of items) {
+        const mid = item.id || item.medicine_id;
+        const qty = Number(item.qty || 0);
+        if (!mid || qty <= 0) continue;
+        const {data: med, error} = await db.from('medicines').select('stock').eq('id', mid).maybeSingle();
+        if (error || !med) { alert('স্টক যাচাই করা যায়নি: ' + (error?.message || '')); return; }
+        stockUpdates.push({id: mid, stock: Number(med.stock || 0) + qty});
+      }
+      for (const stock of stockUpdates) {
+        const {error} = await db.from('medicines').update({stock: stock.stock}).eq('id', stock.id);
+        if (error) { alert('স্টক ফেরত যোগ করা যায়নি: ' + error.message); return; }
+      }
+      const {error} = await db.from('sales').delete().eq('id', id);
+      if (error) { alert('Sale delete হয়নি: ' + error.message); return; }
+      alert('Daily Sale delete হয়েছে এবং স্টক ফেরত যোগ হয়েছে।');
+      await fetchMedicines();
+      await loadYearlySalesData();
     }
 
     function downloadDailySalesPDF() {
